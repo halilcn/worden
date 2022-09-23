@@ -9,16 +9,12 @@ const initialState: auth = {
   username: ''
 };
 
-interface ISetUsername {
-  username: string;
-}
-
 export const auth = createSlice({
   initialState,
   name: 'auth',
   reducers: {
-    setUsername: (state, { payload }: PayloadAction<ISetUsername>) => {
-      state.username = payload.username;
+    setUsername: (state, action: PayloadAction<string>) => {
+      state.username = action.payload;
     }
   }
 });

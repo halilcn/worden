@@ -19,8 +19,11 @@ body,
   height: 100%;
 
   &__wrapper {
-    width: 700px;
+    width: 800px;
     padding: 10px;
     min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
