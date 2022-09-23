@@ -1,0 +1,27 @@
+.welcome {
+  width: 300px;
+  &__text {
+    font-weight: 400;
+    font-size: 30px;
+    color: #282828;
+  }
+
+  &__username-input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    transition: .3s;
+
+    &:focus{
+      border-color: #868686;
+    }
+  }
+
+  &__save-username{
+    background-color: red;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+}

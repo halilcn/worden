@@ -1,0 +1,26 @@
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  font-family: 'Comfortaa', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  &__wrapper {
+    width: 700px;
+    padding: 10px;
+    min-height: 300px;
+  }
+}
