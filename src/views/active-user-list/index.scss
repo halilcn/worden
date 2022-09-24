@@ -1,0 +1,58 @@
+@import '../../styles/mixins';
+
+.active-users {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+
+  &__search {
+    @include input;
+  }
+
+  &__list {
+    margin-top: 10px;
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #f6f6f6;
+    border-radius: 10px;
+    margin: 10px 0;
+
+    &--idle {
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover {
+        background-color: #fbfbfb;
+      }
+    }
+  }
+
+  &__username {
+    font-size: 15px;
+  }
+
+  &__status {
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 300;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    padding: 5px 8px;
+
+    &--idle {
+      color: #18a518;
+      border-color: #18a518;
+    }
+
+    &--busy {
+      color: #ed4444;
+      border-color: #ed4444;
+    }
+  }
+}

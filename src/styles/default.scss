@@ -3,13 +3,13 @@ body,
 #root {
   margin: 0;
   height: 100%;
-  font-family: 'Comfortaa', cursive;
 }
 
 * {
   box-sizing: border-box;
   outline: none;
   text-decoration: none;
+  font-family: 'Comfortaa', cursive;
 }
 
 .main {
@@ -22,8 +22,10 @@ body,
     width: 800px;
     padding: 10px;
     min-height: 300px;
+    max-height: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: auto;
   }
 }
