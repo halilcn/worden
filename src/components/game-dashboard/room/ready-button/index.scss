@@ -1,0 +1,13 @@
+.ready{
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+
+  &__button{
+    background-color: #c9ffc9;
+    color: green;
+    padding: 12px 50px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}

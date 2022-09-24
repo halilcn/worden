@@ -2,6 +2,7 @@ import React from 'react';
 
 import WelcomeUser from '../views/welcome-user';
 import ActiveUserList from '../views/active-user-list';
+import GameDashboard from '../views/game-dashboard';
 
 export default [
   {
@@ -11,5 +12,9 @@ export default [
   {
     path: '/active-user-list',
     element: <ActiveUserList />
+  },
+  {
+    path: '/game',
+    element: <GameDashboard />
   }
 ];
