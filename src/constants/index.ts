@@ -1,5 +1,5 @@
 export const routerPaths = {
   welcome: '/',
-  activeUserList: '/active-user-list',
+  activeUsers: '/active-users',
   game: '/game'
 };

@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-export interface auth {
+export interface IAuth {
   username: string;
 }
 
-const initialState: auth = {
+const initialState: IAuth = {
   username: ''
 };
 

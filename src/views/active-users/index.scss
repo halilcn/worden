@@ -1,0 +1,7 @@
+@import '../../styles/mixins';
+
+.active-users {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
