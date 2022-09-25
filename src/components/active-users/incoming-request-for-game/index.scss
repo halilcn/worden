@@ -1,0 +1,41 @@
+.incoming-request-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__text {
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+
+  &__actions {
+    margin-top: 30px;
+    display: flex;
+  }
+
+  &__action-button {
+    margin: 0 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &--reject {
+      background-color: #ffe9e9;
+      color: #ec2626;
+
+      &:hover {
+        background-color: #ffe0e0;
+      }
+    }
+
+    &--accept {
+      background-color: #e1ffe1;
+      color: #2dbc2d;
+
+      &:hover {
+        background-color: #dbffdb;
+      }
+    }
+  }
+}
