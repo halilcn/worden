@@ -4,10 +4,14 @@
   margin-top: 60px;
 
   &__button{
-    background-color: #c9ffc9;
+    background-color: #e7ffe7;
     color: green;
     padding: 12px 50px;
     border-radius: 5px;
     cursor: pointer;
+
+    &:hover{
+      background-color: #e0ffe0;
+    }
   }
 }

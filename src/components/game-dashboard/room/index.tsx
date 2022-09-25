@@ -1,17 +1,16 @@
-import Score from './score';
-
-import './index.scss';
-import TotalRound from './total-round';
-import ReadyButton from './ready-button';
+import './index.scss'
+import ReadyButton from './ready-button'
+import Score from './score'
+import TotalRound from './total-round'
 
 const Room = () => {
   return (
     <div className="room">
       <Score />
-      <TotalRound/>
-      <ReadyButton/>
+      <TotalRound />
+      <ReadyButton />
     </div>
-  );
-};
+  )
+}
 
-export default Room;
+export default Room

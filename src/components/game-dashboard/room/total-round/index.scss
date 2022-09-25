@@ -3,16 +3,23 @@
   justify-content: center;
   margin-top: 70px;
 
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    font-weight: 300;
+    font-size: 17px;
+    color: #4a4a4a;
+  }
+
   &__circle {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: red;
-    padding: 20px;
-    border-radius: 100%;
-  }
-
-  &__title {
+    margin-top: 15px;
   }
 
   &__value {

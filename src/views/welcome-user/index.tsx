@@ -15,13 +15,13 @@ const WelcomeUser = () => {
   const [username, setUsername] = useState<string>('')
 
   useEffect(() => {
-    if (authState.username) navigate(routerPaths.activeUserList)
+    if (authState.username) navigate(routerPaths.activeUsers)
   }, [])
 
   const handleSaveUsername = () => {
     if (username === '') return
     dispatch(authActions.setUsername(username))
-    navigate(routerPaths.activeUserList)
+    navigate(routerPaths.activeUsers)
   }
 
   return (

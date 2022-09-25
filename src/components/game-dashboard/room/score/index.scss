@@ -9,12 +9,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+  }
+
+  &__ready-status {
+    position: absolute;
+    top: -40px;
+    border: 1px solid #32c532;
+    color: #32c532;
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 12px;
   }
 
   &__username {
     font-weight: 700;
     font-size: 21px;
-    color: #39414d;
+    color: #454e5d;
   }
 
   &__point {
@@ -22,7 +33,7 @@
     font-size: 18px;
     padding: 8px 15px;
     background-color: #f8f8f8;
-    color: #3c5f84;
+    color: #23476f;
     border-radius: 10px;
   }
 

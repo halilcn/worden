@@ -1,11 +1,11 @@
-import './index.scss';
+import './index.scss'
 
 const ReadyButton = () => {
   return (
     <div className="ready">
-      <div className="ready__button">Ready</div>
+      <div className="ready__button">Ready !</div>
     </div>
-  );
-};
+  )
+}
 
-export default ReadyButton;
+export default ReadyButton

@@ -10,7 +10,7 @@ export interface IGameRoom {
 
 const initialState: IGameRoom = {
   userIdToRequestForGame: null,
-  userIdToIncomingForGame: 'null',
+  userIdToIncomingForGame: null,
 }
 
 export const gameRoom = createSlice({
