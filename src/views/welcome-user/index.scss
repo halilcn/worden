@@ -12,13 +12,12 @@
 
   &__username-input {
     @include input;
-    margin-top: 20px;
+    margin: 25px 0;
   }
 
   &__save-username {
     background-color: #efefef;
     color: #2e2e2e;
-    margin-top: 20px;
     padding: 12px;
     text-align: center;
     cursor: pointer;

@@ -1,7 +1,11 @@
 {
+  "trailingComma": "es5",
+  "semi": false,
   "singleQuote": true,
-  "trailingComma": "none",
   "bracketSameLine": true,
   "arrowParens": "avoid",
-  "printWidth": 140
+  "printWidth": 140,
+  "importOrder": ["^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
