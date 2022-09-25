@@ -35,24 +35,25 @@
 
   &__username {
     font-size: 15px;
+    color: #464646;
   }
 
   &__status {
     margin-left: auto;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
     border: 1px solid transparent;
     border-radius: 15px;
     padding: 5px 8px;
 
     &--idle {
-      color: #18a518;
-      border-color: #18a518;
+      color: #37ca37;
+      border-color: #37ca37;
     }
 
     &--busy {
-      color: #ed4444;
-      border-color: #ed4444;
+      color: #ed5757;
+      border-color: #ed5757;
     }
   }
 }
