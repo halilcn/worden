@@ -2,26 +2,28 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { routerPaths } from '../../constants'
+import { ROUTER_PATHS } from '../../constants'
 import { RootState } from '../../store'
 import { authActions } from '../../store/reducers/auth'
 import './index.scss'
 
 const WelcomeUser = () => {
   const dispatch = useDispatch()
-  const authState = useSelector((state: RootState) => state.auth)
   const navigate = useNavigate()
+  const authState = useSelector((state: RootState) => state.auth)
+  const socketServerState = useSelector((state: RootState) => state.socketServer)
 
   const [username, setUsername] = useState<string>('')
 
   useEffect(() => {
-    if (authState.username) navigate(routerPaths.activeUsers)
+    if (authState.username) navigate(ROUTER_PATHS.activeUsers)
   }, [])
 
   const handleSaveUsername = () => {
     if (username === '') return
     dispatch(authActions.setUsername(username))
-    navigate(routerPaths.activeUsers)
+    socketServerState.server.emit('test_channel', 'test')
+   // navigate(ROUTER_PATHS.activeUsers)
   }
 
   return (

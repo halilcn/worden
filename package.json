@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev-server": "npx ts-node src/server/index.ts",
+    "dev-server": "ts-node src/server/index.ts",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -19,7 +19,8 @@
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.1",
     "sass": "^1.55.0",
-    "socket.io": "^4.5.2"
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.2"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",

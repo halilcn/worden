@@ -1,21 +1,21 @@
 import React from 'react'
 
-import { routerPaths } from '../constants'
+import { ROUTER_PATHS } from '../constants'
 import ActiveUsers from '../views/active-users'
 import GameDashboard from '../views/game-dashboard'
 import WelcomeUser from '../views/welcome-user'
 
 export default [
   {
-    path: routerPaths.welcome,
+    path: ROUTER_PATHS.welcome,
     element: <WelcomeUser />,
   },
   {
-    path: routerPaths.activeUsers,
+    path: ROUTER_PATHS.activeUsers,
     element: <ActiveUsers />,
   },
   {
-    path: routerPaths.game,
+    path: ROUTER_PATHS.game,
     element: <GameDashboard />,
   },
 ]
