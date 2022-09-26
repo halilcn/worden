@@ -1,11 +1,10 @@
-/*
-* import { createServer } from 'http'
+import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
 const httpServer = createServer()
 const io = new Server(httpServer)
 
-console.log('running now!!');
+console.log('running now!!')
 
 io.on('connection', (socket: Socket) => {
   console.log('birisi geldi !')
@@ -14,10 +13,9 @@ io.on('connection', (socket: Socket) => {
   })
 })
 
-httpServer.listen(3000)*/
+httpServer.listen(3000)
 
 console.log('selammmmm')
-export default {}
 
 /*const {PORT,ACTIONS} = require('./constants');
 const http = require('http').createServer();
