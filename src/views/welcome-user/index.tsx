@@ -22,7 +22,7 @@ const WelcomeUser = () => {
   const handleSaveUsername = () => {
     if (username === '') return
     dispatch(authActions.setUsername(username))
-    socketServerState.server.emit('test_channel', 'test')
+    socketServerState.server?.emit('test_channel', 'test')
    // navigate(ROUTER_PATHS.activeUsers)
   }
 

@@ -5,3 +5,8 @@ export const ROUTER_PATHS = {
 }
 
 export const SOCKET_SERVER_URL = 'http://127.0.0.1:3000'
+
+export const SOCKET_CHANNELS = {
+  LOGIN: 'LOGIN',
+  DISCONNECT: 'disconnect',
+}

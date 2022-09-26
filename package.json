@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev-server": "ts-node src/server/index.ts",
+    "dev-server": "ts-node --experimental-specifier-resolution=node src/server/index.ts",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

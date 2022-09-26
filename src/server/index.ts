@@ -1,16 +1,21 @@
 import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
+import { SOCKET_CHANNELS } from '../constants'
+
 const httpServer = createServer()
 const io = new Server(httpServer)
 
-console.log('server running...');
+console.log('server running...')
 
 io.on('connection', (socket: Socket) => {
-  console.log('birisi geldi !')
-  socket.on('test_channel', () => {
-    console.log(socket.id);
-    console.log('test channel okey')
+  socket.on(SOCKET_CHANNELS.LOGIN, (username: string) => {
+    console.log('login oldu !')
+    console.log(socket.id)
+  })
+
+  socket.on(SOCKET_CHANNELS.DISCONNECT, () => {
+    console.log('DİSCONNECCT ÇAILIŞTI !')
   })
 
   //io.to(socket.id).emit();

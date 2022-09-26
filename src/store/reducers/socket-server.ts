@@ -1,25 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { Socket } from 'socket.io-client'
+import io from 'socket.io-client'
+
+import { SOCKET_SERVER_URL } from '../../constants'
 
 export interface ISocketServer {
-  server: any
+  server: Socket
 }
 
 const initialState: ISocketServer = {
-  server: null,
+  server: io(SOCKET_SERVER_URL, { transports: ['websocket'] }),
 }
 
 export const socketServer = createSlice({
   initialState,
   name: 'socketServer',
   reducers: {
-    setServer: (state, action: PayloadAction<Socket>) => {
-      state.server = action.payload
-    },
-    deleteServer: state => {
-      state.server = null
-    },
+
   },
 })
 
