@@ -20,7 +20,7 @@ const App = () => {
     //const socket = io(SOCKET_SERVER_URL, { transports: ['websocket'] })
     // dispatch(socketServerActions.setServer(socket))
 
-    socketServerState.server?.emit('LOGIN','test')
+   // socketServerState.server?.emit('LOGIN','test')
   //  serverActions.login()
 
     return () => {

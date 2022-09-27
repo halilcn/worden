@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { ROUTER_PATHS } from '../../constants'
+import { ROUTER_PATHS, SOCKET_CHANNELS } from '../../constants'
 import { RootState } from '../../store'
 import { authActions } from '../../store/reducers/auth'
 import './index.scss'
@@ -19,11 +19,17 @@ const WelcomeUser = () => {
     if (authState.username) navigate(ROUTER_PATHS.activeUsers)
   }, [])
 
+  useEffect(() => {
+    socketServerState.server?.on(SOCKET_CHANNELS.ALREADY_EXIST_USERNAME, () => {
+      alert('ALREADY EXİSTS')
+    })
+  }, [])
+
   const handleSaveUsername = () => {
     if (username === '') return
     dispatch(authActions.setUsername(username))
-    socketServerState.server?.emit('test_channel', 'test')
-   // navigate(ROUTER_PATHS.activeUsers)
+    socketServerState.server?.emit(SOCKET_CHANNELS.LOGIN, username)
+    // navigate(ROUTER_PATHS.activeUsers)
   }
 
   return (
