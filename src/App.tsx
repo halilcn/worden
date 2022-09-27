@@ -9,8 +9,8 @@ const App = () => {
   const router = createBrowserRouter(routes)
 
   useEffect(() => {
-    //TODO:!
-   // return () => serverActions.disconnect()
+    //TODO: disconnect!
+    // return () => serverActions.disconnect()
   }, [])
 
   return (

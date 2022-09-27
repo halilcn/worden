@@ -12,9 +12,7 @@ console.log('server running...')
 const users: IServerUser[] = []
 
 io.on('connection', (socket: Socket) => {
-  console.log('birisi geldi');
-
-
+  console.log('birisi geldi')
 
   socket.on(SOCKET_CHANNELS.LOGIN, (username: string) => {
     const alreadyExistsUsername = users.find(user => user.username === username)
@@ -27,6 +25,8 @@ io.on('connection', (socket: Socket) => {
     }
 
     users.push({ username, socketId: socket.id })
+
+    io.to(socket.id).emit(SOCKET_CHANNELS.CORRECT_USERNAME_TO_LOGIN)
 
     console.log('login oldu !')
     console.log(socket.id)

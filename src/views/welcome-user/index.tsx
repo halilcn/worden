@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { ROUTER_PATHS, SOCKET_CHANNELS } from '../../constants'
+import { ROUTER_PATHS } from '../../constants'
 import { RootState } from '../../store'
 import { authActions } from '../../store/reducers/auth'
 import serverEvents from '../../utils/server-events'
@@ -13,26 +13,26 @@ const WelcomeUser = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const authState = useSelector((state: RootState) => state.auth)
-  const socketServerState = useSelector((state: RootState) => state.socketServer)
 
   const [username, setUsername] = useState<string>('')
+  const [alreadyExist, setAlreadyExist] = useState<boolean>(false)
 
   useEffect(() => {
     if (authState.username) navigate(ROUTER_PATHS.activeUsers)
-  }, [])
 
-  useEffect(() => {
     serverListeners.alreadyExistUsername(() => {
-      alert('zaten bu var !')
+      setAlreadyExist(true)
+    })
+
+    serverListeners.correctUsernameToLogin(() => {
+      dispatch(authActions.setUsername(username))
+      navigate(ROUTER_PATHS.activeUsers)
     })
   }, [])
 
   const handleSaveUsername = () => {
     if (username === '') return
-    dispatch(authActions.setUsername(username))
     serverEvents.login(username)
-    //socketServerState.server?.emit(SOCKET_CHANNELS.LOGIN, username)
-    // navigate(ROUTER_PATHS.activeUsers)
   }
 
   return (
@@ -44,6 +44,7 @@ const WelcomeUser = () => {
         placeholder="Type a username to play..."
         className="welcome__username-input"
       />
+      {alreadyExist && <div className="welcome__error">Already exist the username</div>}
       <div onClick={handleSaveUsername} className="welcome__save-username">
         Login
       </div>

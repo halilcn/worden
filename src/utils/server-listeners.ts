@@ -7,6 +7,11 @@ const alreadyExistUsername = (listener: () => void) => {
   return server.on(SOCKET_CHANNELS.ALREADY_EXIST_USERNAME, listener)
 }
 
+const correctUsernameToLogin = (listener: () => void) => {
+  return server.on(SOCKET_CHANNELS.CORRECT_USERNAME_TO_LOGIN, listener)
+}
+
 export default {
   alreadyExistUsername,
+  correctUsernameToLogin,
 }
