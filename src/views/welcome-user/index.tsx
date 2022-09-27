@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { ROUTER_PATHS, SOCKET_CHANNELS } from '../../constants'
 import { RootState } from '../../store'
 import { authActions } from '../../store/reducers/auth'
+import serverEvents from '../../utils/server-events'
+import serverListeners from '../../utils/server-listeners'
 import './index.scss'
 
 const WelcomeUser = () => {
@@ -20,15 +22,16 @@ const WelcomeUser = () => {
   }, [])
 
   useEffect(() => {
-    socketServerState.server?.on(SOCKET_CHANNELS.ALREADY_EXIST_USERNAME, () => {
-      alert('ALREADY EXİSTS')
+    serverListeners.alreadyExistUsername(() => {
+      alert('zaten bu var !')
     })
   }, [])
 
   const handleSaveUsername = () => {
     if (username === '') return
     dispatch(authActions.setUsername(username))
-    socketServerState.server?.emit(SOCKET_CHANNELS.LOGIN, username)
+    serverEvents.login(username)
+    //socketServerState.server?.emit(SOCKET_CHANNELS.LOGIN, username)
     // navigate(ROUTER_PATHS.activeUsers)
   }
 

@@ -12,12 +12,16 @@ console.log('server running...')
 const users: IServerUser[] = []
 
 io.on('connection', (socket: Socket) => {
+  console.log('birisi geldi');
+
+
+
   socket.on(SOCKET_CHANNELS.LOGIN, (username: string) => {
     const alreadyExistsUsername = users.find(user => user.username === username)
 
     if (alreadyExistsUsername) {
-      console.log('already exists');
-      console.log(users);
+      console.log('already exists')
+      console.log(users)
       io.to(socket.id).emit(SOCKET_CHANNELS.ALREADY_EXIST_USERNAME)
       return
     }

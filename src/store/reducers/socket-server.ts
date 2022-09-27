@@ -16,9 +16,7 @@ const initialState: ISocketServer = {
 export const socketServer = createSlice({
   initialState,
   name: 'socketServer',
-  reducers: {
-
-  },
+  reducers: {},
 })
 
 export const socketServerActions = socketServer.actions
