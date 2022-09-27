@@ -8,7 +8,8 @@ export interface IActiveUser {
   status: ActiveUserStatus
 }
 
-export interface IServerUser{
-  username:string
-  socketId:string
+export interface IServerUser {
+  username: string
+  socketId: string
+  status: ActiveUserStatus
 }

@@ -2,7 +2,7 @@ import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
 import { SOCKET_CHANNELS } from '../constants'
-import { IServerUser } from '../types'
+import { ActiveUserStatus, IServerUser } from '../types'
 
 const httpServer = createServer()
 const io = new Server(httpServer)
@@ -24,9 +24,10 @@ io.on('connection', (socket: Socket) => {
       return
     }
 
-    users.push({ username, socketId: socket.id })
+    users.push({ username, socketId: socket.id, status: ActiveUserStatus.IDLE })
 
     io.to(socket.id).emit(SOCKET_CHANNELS.CORRECT_USERNAME_TO_LOGIN)
+    io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
 
     console.log('login oldu !')
     console.log(socket.id)

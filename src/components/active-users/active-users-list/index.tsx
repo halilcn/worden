@@ -1,19 +1,15 @@
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
+import { RootState } from '../../../store'
 import { ActiveUserStatus, IActiveUser } from '../../../types'
 import './index.scss'
 
 const ActiveUsersList = () => {
-  const [filterText, setFilterText] = useState<string>('')
-  const [activeUsers, setActiveUsers] = useState<IActiveUser[]>([])
+  const gameRoom = useSelector((state: RootState) => state.gameRoom)
 
-  useEffect(() => {
-    setActiveUsers([
-      { username: 'halil', status: ActiveUserStatus.BUSY },
-      { username: 'ahmet', status: ActiveUserStatus.IDLE },
-    ])
-  }, [])
+  const [filterText, setFilterText] = useState<string>('')
 
   const isStatusIdle = (status: ActiveUserStatus) => {
     return status === ActiveUserStatus.IDLE
@@ -37,7 +33,7 @@ const ActiveUsersList = () => {
         className="users-list__search"
       />
       <div className="users-list__list">
-        {activeUsers
+        {gameRoom.activeUsers
           .filter(user => user.username.includes(filterText))
           .map(user => (
             <div

@@ -1,5 +1,6 @@
 import { SOCKET_CHANNELS } from '../constants'
 import store from '../store'
+import { IServerUser } from '../types'
 
 const server = store.getState().socketServer.server
 
@@ -11,7 +12,12 @@ const correctUsernameToLogin = (listener: () => void) => {
   return server.on(SOCKET_CHANNELS.CORRECT_USERNAME_TO_LOGIN, listener)
 }
 
+const activeUsers = (listener: (activeUsers: IServerUser[]) => void) => {
+  return server.on(SOCKET_CHANNELS.ACTIVE_USERS, listener)
+}
+
 export default {
   alreadyExistUsername,
   correctUsernameToLogin,
+  activeUsers,
 }
