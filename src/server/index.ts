@@ -9,7 +9,7 @@ const io = new Server(httpServer)
 
 console.log('server running...')
 
-const users: IServerUser[] = []
+let users: IServerUser[] = []
 
 io.on('connection', (socket: Socket) => {
   console.log('birisi geldi')
@@ -29,8 +29,14 @@ io.on('connection', (socket: Socket) => {
     io.to(socket.id).emit(SOCKET_CHANNELS.CORRECT_USERNAME_TO_LOGIN)
     io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
 
-    console.log('login oldu !')
+    console.log('login selam!')
     console.log(socket.id)
+  })
+
+  socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {
+    console.log('logout geldi !!!')
+    users = users.filter(user => user.username !== username)
+    io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
   })
 
   socket.on(SOCKET_CHANNELS.DISCONNECT, () => {

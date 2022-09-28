@@ -3,11 +3,6 @@ export enum ActiveUserStatus {
   BUSY = 'busy',
 }
 
-export interface IActiveUser {
-  username: string
-  status: ActiveUserStatus
-}
-
 export interface IServerUser {
   username: string
   socketId: string

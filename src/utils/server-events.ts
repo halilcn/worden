@@ -7,6 +7,10 @@ const login = (username: string) => {
   server.emit(SOCKET_CHANNELS.LOGIN, username)
 }
 
+const logout = (username: string) => {
+  server.emit(SOCKET_CHANNELS.LOGOUT, username)
+}
+
 const disconnect = () => {
   server.disconnect()
 }
@@ -14,4 +18,5 @@ const disconnect = () => {
 export default {
   login,
   disconnect,
+  logout,
 }

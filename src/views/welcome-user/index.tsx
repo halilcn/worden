@@ -25,8 +25,10 @@ const WelcomeUser = () => {
     })
 
     serverListeners.correctUsernameToLogin(() => {
-      dispatch(authActions.setUsername(username))
+      alert('test')
       navigate(ROUTER_PATHS.activeUsers)
+      //   dispatch(authActions.setUsername(username))
+      //todo: username problem ?!
     })
   }, [])
 
