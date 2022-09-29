@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { ROUTER_PATHS } from '../../constants'
+import { ROUTER_PATHS, USERNAME_LOCALSTORAGE } from '../../constants'
 import { RootState } from '../../store'
 import { authActions } from '../../store/reducers/auth'
 import serverEvents from '../../utils/server-events'
@@ -25,12 +25,11 @@ const WelcomeUser = () => {
     })
 
     serverListeners.correctUsernameToLogin(() => {
-      alert('test')
+      dispatch(authActions.setUsername(username))
+      localStorage.setItem(USERNAME_LOCALSTORAGE, username)
       navigate(ROUTER_PATHS.activeUsers)
-      //   dispatch(authActions.setUsername(username))
-      //todo: username problem ?!
     })
-  }, [])
+  }, [username])
 
   const handleSaveUsername = () => {
     if (username === '') return

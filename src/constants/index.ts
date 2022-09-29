@@ -1,3 +1,5 @@
+export const USERNAME_LOCALSTORAGE = 'USERNAME_LOCALSTORAGE'
+
 export const ROUTER_PATHS = {
   welcome: '/',
   activeUsers: '/active-users',
