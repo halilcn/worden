@@ -26,11 +26,15 @@ io.on('connection', (socket: Socket) => {
 
     users.push({ username, socketId: socket.id, status: ActiveUserStatus.IDLE })
 
-    io.to(socket.id).emit(SOCKET_CHANNELS.CORRECT_USERNAME_TO_LOGIN)
+    io.to(socket.id).emit(SOCKET_CHANNELS.CORRECT_USERNAME_TO_LOGIN, socket.id)
     io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
 
     console.log('login selam!')
     console.log(socket.id)
+  })
+
+  socket.on(SOCKET_CHANNELS.SEND_GAME_REQUEST, (socketId: string) => {
+    io.to(socketId).emit(SOCKET_CHANNELS.INCOMING_GAME_REQUEST, socket.id)
   })
 
   socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {

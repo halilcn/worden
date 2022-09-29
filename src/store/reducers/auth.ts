@@ -1,23 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface IAuth {
-  username: string;
+  username: string
+  socketId: string
 }
 
 const initialState: IAuth = {
-  username: ''
-};
+  username: '',
+  socketId: '',
+}
 
 export const auth = createSlice({
   initialState,
   name: 'auth',
   reducers: {
     setUsername: (state, action: PayloadAction<string>) => {
-      state.username = action.payload;
-    }
-  }
-});
+      state.username = action.payload
+    },
+    setSocketId: (state, action: PayloadAction<string>) => {
+      state.socketId = action.payload
+    },
+  },
+})
 
-export const authActions = auth.actions;
-export default auth.reducer;
+export const authActions = auth.actions
+export default auth.reducer

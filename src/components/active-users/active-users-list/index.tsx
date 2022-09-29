@@ -8,6 +8,7 @@ import './index.scss'
 
 const ActiveUsersList = () => {
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
+  const auth = useSelector((state: RootState) => state.auth)
 
   const [filterText, setFilterText] = useState<string>('')
 
@@ -34,7 +35,7 @@ const ActiveUsersList = () => {
       />
       <div className="users-list__list">
         {gameRoom.activeUsers
-          .filter(user => user.username.includes(filterText))
+          .filter(user => user.username.includes(filterText) && user.username !== auth.username)
           .map(user => (
             <div
               onClick={() => isStatusIdle(user.status) && handleStartGame()}

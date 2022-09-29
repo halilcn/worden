@@ -24,8 +24,9 @@ const WelcomeUser = () => {
       setAlreadyExist(true)
     })
 
-    serverListeners.correctUsernameToLogin(() => {
+    serverListeners.correctUsernameToLogin((socketId: string) => {
       dispatch(authActions.setUsername(username))
+      dispatch(authActions.setSocketId(socketId))
       localStorage.setItem(USERNAME_LOCALSTORAGE, username)
       navigate(ROUTER_PATHS.activeUsers)
     })
