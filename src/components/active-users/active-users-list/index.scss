@@ -9,6 +9,13 @@
     @include input;
   }
 
+  &__no-active-users {
+    color: #3e3e3e;
+    font-weight: 300;
+    font-size: 13px;
+    margin-top: 20px;
+  }
+
   &__list {
     margin-top: 10px;
     overflow-y: auto;

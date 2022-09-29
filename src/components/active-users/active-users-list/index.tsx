@@ -33,24 +33,27 @@ const ActiveUsersList = () => {
         placeholder="Search an online user by username..."
         className="users-list__search"
       />
-      <div className="users-list__list">
-        {gameRoom.activeUsers
-          .filter(user => user.username.includes(filterText) && user.username !== auth.username)
-          .map(user => (
-            <div
-              onClick={() => isStatusIdle(user.status) && handleStartGame()}
-              className={cn('users-list__item', { 'users-list__item--idle': isStatusIdle(user.status) })}>
-              <div className="users-list__username">{user.username}</div>
+      {gameRoom.activeUsers.length <= 1 && <div className="users-list__no-active-users">No active users :(</div>}
+      {gameRoom.activeUsers.length > 1 && (
+        <div className="users-list__list">
+          {gameRoom.activeUsers
+            .filter(user => user.username.includes(filterText) && user.username !== auth.username)
+            .map(user => (
               <div
-                className={cn('users-list__status', {
-                  'users-list__status--busy': isStatusBusy(user.status),
-                  'users-list__status--idle': isStatusIdle(user.status),
-                })}>
-                {user.status}
+                onClick={() => isStatusIdle(user.status) && handleStartGame()}
+                className={cn('users-list__item', { 'users-list__item--idle': isStatusIdle(user.status) })}>
+                <div className="users-list__username">{user.username}</div>
+                <div
+                  className={cn('users-list__status', {
+                    'users-list__status--busy': isStatusBusy(user.status),
+                    'users-list__status--idle': isStatusIdle(user.status),
+                  })}>
+                  {user.status}
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
+      )}
     </div>
   )
 }
