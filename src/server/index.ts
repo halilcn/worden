@@ -33,8 +33,8 @@ io.on('connection', (socket: Socket) => {
     console.log(socket.id)
   })
 
-  socket.on(SOCKET_CHANNELS.SEND_GAME_REQUEST, (socketId: string) => {
-    io.to(socketId).emit(SOCKET_CHANNELS.INCOMING_GAME_REQUEST, socket.id)
+  socket.on(SOCKET_CHANNELS.SEND_GAME_REQUEST, (fromSocketId: string) => {
+    io.to(fromSocketId).emit(SOCKET_CHANNELS.INCOMING_GAME_REQUEST, socket.id)
   })
 
   socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {

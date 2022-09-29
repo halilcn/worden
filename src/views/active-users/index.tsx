@@ -11,11 +11,11 @@ const ActiveUsers = () => {
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
 
   const memorizedDynamicContent = useMemo(() => {
-    if (gameRoom.userIdToRequestForGame) return <RequestedForGame />
-    if (gameRoom.userIdToIncomingForGame) return <IncomingRequestForGame />
+    if (gameRoom.userSocketIdToRequestForGame) return <RequestedForGame />
+    if (gameRoom.userSocketIdToIncomingForGame) return <IncomingRequestForGame />
 
     return <ActiveUsersList />
-  }, [gameRoom.userIdToRequestForGame, gameRoom.userIdToIncomingForGame])
+  }, [gameRoom.userSocketIdToRequestForGame, gameRoom.userSocketIdToIncomingForGame])
 
   return <div className="active-users">{memorizedDynamicContent}</div>
 }

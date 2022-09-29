@@ -1,12 +1,15 @@
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from '../../../store'
+import { gameRoomActions } from '../../../store/reducers/game-room'
 import { ActiveUserStatus } from '../../../types'
+import serverEvents from '../../../utils/server-events'
 import './index.scss'
 
 const ActiveUsersList = () => {
+  const dispatch = useDispatch()
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
   const auth = useSelector((state: RootState) => state.auth)
 
@@ -20,9 +23,9 @@ const ActiveUsersList = () => {
     return status === ActiveUserStatus.BUSY
   }
 
-  const handleStartGame = () => {
-    //socket istek. socket id ile
-    alert('test')
+  const handleStartGame = (socketId: string) => {
+    serverEvents.sendGameRequest(socketId)
+    dispatch(gameRoomActions.setSocketUserIdToRequestForGame(auth.socketId))
   }
 
   return (
@@ -40,7 +43,7 @@ const ActiveUsersList = () => {
             .filter(user => user.username.includes(filterText) && user.username !== auth.username)
             .map(user => (
               <div
-                onClick={() => isStatusIdle(user.status) && handleStartGame()}
+                onClick={() => isStatusIdle(user.status) && handleStartGame(user.socketId)}
                 className={cn('users-list__item', { 'users-list__item--idle': isStatusIdle(user.status) })}>
                 <div className="users-list__username">{user.username}</div>
                 <div

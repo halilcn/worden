@@ -11,6 +11,10 @@ const logout = (username: string) => {
   server.emit(SOCKET_CHANNELS.LOGOUT, username)
 }
 
+const sendGameRequest = (socketId: string) => {
+  server.emit(SOCKET_CHANNELS.SEND_GAME_REQUEST, socketId)
+}
+
 const disconnect = () => {
   server.disconnect()
 }
@@ -19,4 +23,5 @@ export default {
   login,
   disconnect,
   logout,
+  sendGameRequest
 }

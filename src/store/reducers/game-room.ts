@@ -6,14 +6,14 @@ import { IServerUser } from '../../types'
 type userIdForGame = null | string
 
 export interface IGameRoom {
-  userIdToRequestForGame: userIdForGame
-  userIdToIncomingForGame: userIdForGame
+  userSocketIdToRequestForGame: userIdForGame
+  userSocketIdToIncomingForGame: userIdForGame
   activeUsers: IServerUser[]
 }
 
 const initialState: IGameRoom = {
-  userIdToRequestForGame: null,
-  userIdToIncomingForGame: null,
+  userSocketIdToRequestForGame: null,
+  userSocketIdToIncomingForGame: null,
   activeUsers: [],
 }
 
@@ -21,8 +21,11 @@ export const gameRoom = createSlice({
   initialState,
   name: 'gameRoom',
   reducers: {
-    setUserIdToRequestForGame: (state, action: PayloadAction<userIdForGame>) => {
-      state.userIdToRequestForGame = action.payload
+    setSocketUserIdToRequestForGame: (state, action: PayloadAction<userIdForGame>) => {
+      state.userSocketIdToRequestForGame = action.payload
+    },
+    setSocketUserIdToIncomingForGame: (state, action: PayloadAction<userIdForGame>) => {
+      state.userSocketIdToIncomingForGame = action.payload
     },
     setActiveUsers: (state, action: PayloadAction<IServerUser[]>) => {
       state.activeUsers = action.payload

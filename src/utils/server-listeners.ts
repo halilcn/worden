@@ -16,8 +16,13 @@ const activeUsers = (listener: (activeUsers: IServerUser[]) => void) => {
   return server.on(SOCKET_CHANNELS.ACTIVE_USERS, listener)
 }
 
+const incomingGameRequest = (listener: (fromUserSocketId: string) => void) => {
+  return server.on(SOCKET_CHANNELS.INCOMING_GAME_REQUEST, listener)
+}
+
 export default {
   alreadyExistUsername,
   correctUsernameToLogin,
   activeUsers,
+  incomingGameRequest,
 }
