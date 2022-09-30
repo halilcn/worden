@@ -24,7 +24,7 @@ const gameCanceled = (listener: () => void) => {
   return server.on(SOCKET_CHANNELS.GAME_CANCELED, listener)
 }
 
-const gameAccepted = (listener: () => void) => {
+const gameAccepted = (listener: (roomId: string) => void) => {
   return server.on(SOCKET_CHANNELS.GAME_ACCEPTED, listener)
 }
 

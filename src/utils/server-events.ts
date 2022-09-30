@@ -24,6 +24,10 @@ const acceptGameRequest = (payload: IAcceptGameRequest) => {
   server.emit(SOCKET_CHANNELS.ACCEPT_GAME_REQUEST, payload)
 }
 
+const loginGameRoom = (roomId: string) => {
+  server.emit(SOCKET_CHANNELS.LOGIN_GAME_ROOM, roomId)
+}
+
 const disconnect = () => {
   server.disconnect()
 }
@@ -35,4 +39,5 @@ export default {
   sendGameRequest,
   cancelGameRequest,
   acceptGameRequest,
+  loginGameRoom,
 }

@@ -6,6 +6,7 @@ import IncomingRequestForGame from '../../components/active-users/incoming-reque
 import RequestedForGame from '../../components/active-users/requested-for-game'
 import { RootState } from '../../store'
 import { gameRoomActions } from '../../store/reducers/game-room'
+import serverEvents from '../../utils/server-events'
 import serverListeners from '../../utils/server-listeners'
 import './index.scss'
 
@@ -18,8 +19,8 @@ const ActiveUsers = () => {
       dispatch(gameRoomActions.leaveFromRoom())
     })
 
-    serverListeners.gameAccepted(() => {
-      alert('game accepted ! the game is starting...')
+    serverListeners.gameAccepted(roomId => {
+      serverEvents.loginGameRoom(roomId)
     })
   }, [])
 
