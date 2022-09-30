@@ -6,12 +6,19 @@ import { RootState } from '../../../store'
 import { gameRoomActions } from '../../../store/reducers/game-room'
 import { ActiveUserStatus } from '../../../types'
 import serverEvents from '../../../utils/server-events'
+import serverListeners from '../../../utils/server-listeners'
 import './index.scss'
 
 const ActiveUsersList = () => {
   const dispatch = useDispatch()
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
   const auth = useSelector((state: RootState) => state.auth)
+
+  useEffect(() => {
+    serverListeners.incomingGameRequest((fromUserSocketId: string) => {
+      dispatch(gameRoomActions.setSocketUserIdToIncomingForGame(fromUserSocketId))
+    })
+  }, [])
 
   const [filterText, setFilterText] = useState<string>('')
 
@@ -25,7 +32,7 @@ const ActiveUsersList = () => {
 
   const handleStartGame = (socketId: string) => {
     serverEvents.sendGameRequest(socketId)
-    dispatch(gameRoomActions.setSocketUserIdToRequestForGame(auth.socketId))
+    dispatch(gameRoomActions.setSocketUserIdToRequestForGame(socketId))
   }
 
   return (

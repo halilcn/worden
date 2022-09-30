@@ -18,10 +18,6 @@ const App = () => {
       dispatch(gameRoomActions.setActiveUsers(activeUsers))
     })
 
-    serverListeners.incomingGameRequest((fromUserSocketId: string) => {
-      dispatch(gameRoomActions.setSocketUserIdToIncomingForGame(fromUserSocketId))
-    })
-
     return () => {
       const username = localStorage.getItem(USERNAME_LOCALSTORAGE)
 

@@ -20,9 +20,14 @@ const incomingGameRequest = (listener: (fromUserSocketId: string) => void) => {
   return server.on(SOCKET_CHANNELS.INCOMING_GAME_REQUEST, listener)
 }
 
+const gameCanceled = (listener: () => void) => {
+  return server.on(SOCKET_CHANNELS.GAME_CANCELED, listener)
+}
+
 export default {
   alreadyExistUsername,
   correctUsernameToLogin,
   activeUsers,
   incomingGameRequest,
+  gameCanceled,
 }

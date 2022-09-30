@@ -30,6 +30,10 @@ export const gameRoom = createSlice({
     setActiveUsers: (state, action: PayloadAction<IServerUser[]>) => {
       state.activeUsers = action.payload
     },
+    leaveFromRoom: state => {
+      state.userSocketIdToRequestForGame = null
+      state.userSocketIdToIncomingForGame = null
+    },
   },
 })
 

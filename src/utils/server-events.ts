@@ -15,6 +15,10 @@ const sendGameRequest = (socketId: string) => {
   server.emit(SOCKET_CHANNELS.SEND_GAME_REQUEST, socketId)
 }
 
+const cancelGameRequest = (socketId: string) => {
+  server.emit(SOCKET_CHANNELS.CANCEL_GAME_REQUEST, socketId)
+}
+
 const disconnect = () => {
   server.disconnect()
 }
@@ -23,5 +27,6 @@ export default {
   login,
   disconnect,
   logout,
-  sendGameRequest
+  sendGameRequest,
+  cancelGameRequest
 }
