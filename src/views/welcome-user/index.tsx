@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,8 +14,9 @@ const WelcomeUser = () => {
   const navigate = useNavigate()
   const authState = useSelector((state: RootState) => state.auth)
 
-  const [username, setUsername] = useState<string>('')
   const [alreadyExist, setAlreadyExist] = useState<boolean>(false)
+
+  const usernameRef = useRef<string>('')
 
   useEffect(() => {
     if (authState.username) navigate(ROUTER_PATHS.activeUsers)
@@ -25,16 +26,23 @@ const WelcomeUser = () => {
     })
 
     serverListeners.correctUsernameToLogin((socketId: string) => {
-      dispatch(authActions.setUsername(username))
+      alert(usernameRef.current)
+      dispatch(authActions.setUsername(usernameRef.current))
       dispatch(authActions.setSocketId(socketId))
-      localStorage.setItem(USERNAME_LOCALSTORAGE, username)
       navigate(ROUTER_PATHS.activeUsers)
+
+      //TODO:!
+      // localStorage.setItem(USERNAME_LOCALSTORAGE, username)
     })
-  }, [username])
+  }, [])
 
   const handleSaveUsername = () => {
-    if (username === '') return
-    serverEvents.login(username)
+    if (usernameRef.current === '') return
+    serverEvents.login(usernameRef.current)
+  }
+
+  const handleChangeUsername = (username: string) => {
+    usernameRef.current = username
   }
 
   return (
@@ -42,7 +50,7 @@ const WelcomeUser = () => {
       <div className="welcome__text">Welcome !</div>
       <input
         onKeyPress={e => e.key === 'Enter' && handleSaveUsername()}
-        onChange={e => setUsername(e.target.value)}
+        onChange={e => handleChangeUsername(e.target.value)}
         placeholder="Type a username to play..."
         className="welcome__username-input"
       />
