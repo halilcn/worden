@@ -34,7 +34,13 @@ io.on('connection', (socket: Socket) => {
   })
 
   socket.on(SOCKET_CHANNELS.SEND_GAME_REQUEST, (fromSocketId: string) => {
+    users = users.map(user => {
+      if (user.socketId === fromSocketId || user.socketId === socket.id) user.status = ActiveUserStatus.BUSY
+      return user
+    })
+
     io.to(fromSocketId).emit(SOCKET_CHANNELS.INCOMING_GAME_REQUEST, socket.id)
+    io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
   })
 
   socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {
