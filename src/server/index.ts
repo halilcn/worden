@@ -2,7 +2,7 @@ import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
 import { SOCKET_CHANNELS } from '../constants'
-import { ActiveUserStatus, IServerUser } from '../types'
+import { ActiveUserStatus, IAcceptGameRequest, IGameRoom, IServerUser } from '../types'
 
 const httpServer = createServer()
 const io = new Server(httpServer)
@@ -10,6 +10,7 @@ const io = new Server(httpServer)
 console.log('server running...')
 
 let users: IServerUser[] = []
+let gameRoom: IGameRoom[] = []
 
 io.on('connection', (socket: Socket) => {
   console.log('birisi geldi')
@@ -54,6 +55,15 @@ io.on('connection', (socket: Socket) => {
 
     io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
     io.to(gameUserSocketId).to(socket.id).emit(SOCKET_CHANNELS.GAME_CANCELED)
+  })
+
+  socket.on(SOCKET_CHANNELS.ACCEPT_GAME_REQUEST, (payload: IAcceptGameRequest) => {
+    console.log('accepted game! The game is starting....')
+
+    //todo: join room, emit to the room
+
+    console.log(payload)
+    console.log(socket.id)
   })
 
   socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {

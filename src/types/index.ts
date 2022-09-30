@@ -8,3 +8,12 @@ export interface IServerUser {
   socketId: string
   status: ActiveUserStatus
 }
+
+export interface IGameRoom {
+  room: string
+}
+
+export interface IAcceptGameRequest {
+  roomId: string
+  gameUserSocketId: string
+}

@@ -17,6 +17,10 @@ const ActiveUsers = () => {
     serverListeners.gameCanceled(() => {
       dispatch(gameRoomActions.leaveFromRoom())
     })
+
+    serverListeners.gameAccepted(() => {
+      alert('game accepted ! the game is starting...')
+    })
   }, [])
 
   const memorizedDynamicContent = useMemo(() => {

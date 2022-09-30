@@ -1,5 +1,6 @@
 import { SOCKET_CHANNELS } from '../constants'
 import store from '../store'
+import { IAcceptGameRequest } from '../types'
 
 const server = store.getState().socketServer.server
 
@@ -11,12 +12,16 @@ const logout = (username: string) => {
   server.emit(SOCKET_CHANNELS.LOGOUT, username)
 }
 
-const sendGameRequest = (socketId: string) => {
-  server.emit(SOCKET_CHANNELS.SEND_GAME_REQUEST, socketId)
+const sendGameRequest = (userSocketId: string) => {
+  server.emit(SOCKET_CHANNELS.SEND_GAME_REQUEST, userSocketId)
 }
 
-const cancelGameRequest = (socketId: string) => {
-  server.emit(SOCKET_CHANNELS.CANCEL_GAME_REQUEST, socketId)
+const cancelGameRequest = (userSocketId: string) => {
+  server.emit(SOCKET_CHANNELS.CANCEL_GAME_REQUEST, userSocketId)
+}
+
+const acceptGameRequest = (payload: IAcceptGameRequest) => {
+  server.emit(SOCKET_CHANNELS.ACCEPT_GAME_REQUEST, payload)
 }
 
 const disconnect = () => {
@@ -28,5 +33,6 @@ export default {
   disconnect,
   logout,
   sendGameRequest,
-  cancelGameRequest
+  cancelGameRequest,
+  acceptGameRequest,
 }

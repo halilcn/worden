@@ -24,10 +24,15 @@ const gameCanceled = (listener: () => void) => {
   return server.on(SOCKET_CHANNELS.GAME_CANCELED, listener)
 }
 
+const gameAccepted = (listener: () => void) => {
+  return server.on(SOCKET_CHANNELS.GAME_ACCEPTED, listener)
+}
+
 export default {
   alreadyExistUsername,
   correctUsernameToLogin,
   activeUsers,
   incomingGameRequest,
   gameCanceled,
+  gameAccepted,
 }
