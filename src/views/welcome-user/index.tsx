@@ -26,13 +26,10 @@ const WelcomeUser = () => {
     })
 
     serverListeners.correctUsernameToLogin((socketId: string) => {
-      alert(usernameRef.current)
+      localStorage.setItem(USERNAME_LOCALSTORAGE, usernameRef.current)
       dispatch(authActions.setUsername(usernameRef.current))
       dispatch(authActions.setSocketId(socketId))
       navigate(ROUTER_PATHS.activeUsers)
-
-      //TODO:!
-      // localStorage.setItem(USERNAME_LOCALSTORAGE, username)
     })
   }, [])
 
