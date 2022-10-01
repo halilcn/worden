@@ -14,13 +14,13 @@ const ActiveUsersList = () => {
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
   const auth = useSelector((state: RootState) => state.auth)
 
+  const [filterText, setFilterText] = useState<string>('')
+
   useEffect(() => {
     serverListeners.incomingGameRequest((fromUserSocketId: string) => {
       dispatch(gameRoomActions.setSocketUserIdToIncomingForGame(fromUserSocketId))
     })
   }, [])
-
-  const [filterText, setFilterText] = useState<string>('')
 
   const isStatusIdle = (status: ActiveUserStatus) => {
     return status === ActiveUserStatus.IDLE

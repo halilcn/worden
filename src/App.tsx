@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { USERNAME_LOCALSTORAGE } from './constants'
@@ -21,8 +21,10 @@ const App = () => {
     return () => {
       const username = localStorage.getItem(USERNAME_LOCALSTORAGE)
 
-      if (username) serverActions.logout(username)
-      localStorage.removeItem(USERNAME_LOCALSTORAGE)
+      if (username) {
+        serverActions.logout(username)
+        localStorage.removeItem(USERNAME_LOCALSTORAGE)
+      }
     }
   }, [])
 
