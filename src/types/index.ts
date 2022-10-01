@@ -17,3 +17,9 @@ export interface IAcceptGameRequest {
   roomId: string
   gameUserSocketId: string
 }
+
+export interface IGameAccepted {
+  roomId: string
+  playerOne: string
+  playerTwo: string
+}

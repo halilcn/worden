@@ -1,6 +1,6 @@
 import { SOCKET_CHANNELS } from '../constants'
 import store from '../store'
-import { IServerUser } from '../types'
+import { IGameAccepted, IServerUser } from '../types'
 
 const server = store.getState().socketServer.server
 
@@ -24,7 +24,7 @@ const gameCanceled = (listener: () => void) => {
   return server.on(SOCKET_CHANNELS.GAME_CANCELED, listener)
 }
 
-const gameAccepted = (listener: (roomId: string) => void) => {
+const gameAccepted = (listener: (game: IGameAccepted) => void) => {
   return server.on(SOCKET_CHANNELS.GAME_ACCEPTED, listener)
 }
 

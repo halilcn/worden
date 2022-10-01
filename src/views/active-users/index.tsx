@@ -7,6 +7,7 @@ import IncomingRequestForGame from '../../components/active-users/incoming-reque
 import RequestedForGame from '../../components/active-users/requested-for-game'
 import { ROUTER_PATHS } from '../../constants'
 import { RootState } from '../../store'
+import { gameActions } from '../../store/reducers/game'
 import { gameRoomActions } from '../../store/reducers/game-room'
 import serverEvents from '../../utils/server-events'
 import serverListeners from '../../utils/server-listeners'
@@ -22,9 +23,10 @@ const ActiveUsers = () => {
       dispatch(gameRoomActions.leaveFromRoom())
     })
 
-    serverListeners.gameAccepted(roomId => {
-      serverEvents.loginGameRoom(roomId)
-      dispatch(gameRoomActions.setRoomId(roomId))
+    serverListeners.gameAccepted(game => {
+      serverEvents.loginGameRoom(game.roomId)
+      dispatch(gameRoomActions.setRoomId(game.roomId))
+      dispatch(gameActions.setPlayers(game))
       navigate(ROUTER_PATHS.game)
     })
   }, [])

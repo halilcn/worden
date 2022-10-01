@@ -62,14 +62,14 @@ io.on('connection', (socket: Socket) => {
     //todo: join room, emit to the room
 
     const { roomId, gameUserSocketId } = payload
+    const emitPayload = {
+      roomId,
+      playerOne: payload.gameUserSocketId,
+      playerTwo: socket.id,
+    }
 
-    io.to(gameUserSocketId).emit(SOCKET_CHANNELS.GAME_ACCEPTED, roomId)
-    io.to(socket.id).emit(SOCKET_CHANNELS.GAME_ACCEPTED, roomId)
-
-    //socket.join(roomId)
-    //users.find(user => user.socketId === payload.gameUserSocketId)?.socket.join(roomId)
-
-    // io.to(payload.roomId).emit(SOCKET_CHANNELS.GAME_ACCEPTED)
+    io.to(gameUserSocketId).emit(SOCKET_CHANNELS.GAME_ACCEPTED, emitPayload)
+    io.to(socket.id).emit(SOCKET_CHANNELS.GAME_ACCEPTED, emitPayload)
   })
 
   socket.on(SOCKET_CHANNELS.LOGIN_GAME_ROOM, (roomId: string) => {
