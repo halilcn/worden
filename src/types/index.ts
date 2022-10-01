@@ -18,8 +18,13 @@ export interface IAcceptGameRequest {
   gameUserSocketId: string
 }
 
+export interface IGameAcceptedPlayer {
+  socketId: string
+  username: string
+}
+
 export interface IGameAccepted {
   roomId: string
-  playerOne: string
-  playerTwo: string
+  playerOne: IGameAcceptedPlayer
+  playerTwo: IGameAcceptedPlayer
 }

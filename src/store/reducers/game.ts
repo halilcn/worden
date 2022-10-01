@@ -5,6 +5,7 @@ import { IGameAccepted, IServerUser } from '../../types'
 
 interface IPlayer {
   userSocketId: string
+  username: string
   point: number
 }
 
@@ -23,13 +24,17 @@ export const game = createSlice({
   name: 'game',
   reducers: {
     setPlayers: (state, action: PayloadAction<IGameAccepted>) => {
+      const { playerOne, playerTwo } = action.payload
+
       state.players = [
         {
-          userSocketId: action.payload.playerOne,
+          userSocketId: playerOne.socketId,
+          username: playerOne.username,
           point: 0,
         },
         {
-          userSocketId: action.payload.playerTwo,
+          userSocketId: playerTwo.socketId,
+          username: playerTwo.username,
           point: 0,
         },
       ]

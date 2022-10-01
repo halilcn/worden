@@ -59,13 +59,18 @@ io.on('connection', (socket: Socket) => {
 
   socket.on(SOCKET_CHANNELS.ACCEPT_GAME_REQUEST, (payload: IAcceptGameRequest) => {
     console.log('accepted game! The game is starting....')
-    //todo: join room, emit to the room
 
     const { roomId, gameUserSocketId } = payload
     const emitPayload = {
       roomId,
-      playerOne: payload.gameUserSocketId,
-      playerTwo: socket.id,
+      playerOne: {
+        socketId: payload.gameUserSocketId,
+        username: users.find(user => user.socketId === payload.gameUserSocketId)?.username,
+      },
+      playerTwo: {
+        socketId: socket.id,
+        username: users.find(user => user.socketId === payload.gameUserSocketId)?.username,
+      },
     }
 
     io.to(gameUserSocketId).emit(SOCKET_CHANNELS.GAME_ACCEPTED, emitPayload)
