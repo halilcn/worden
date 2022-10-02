@@ -28,6 +28,10 @@ const gameAccepted = (listener: (game: IGameAccepted) => void) => {
   return server.on(SOCKET_CHANNELS.GAME_ACCEPTED, listener)
 }
 
+const readiedUser = (listener: (userSocketId: string) => void) => {
+  return server.on(SOCKET_CHANNELS.READIED_USER, listener)
+}
+
 export default {
   alreadyExistUsername,
   correctUsernameToLogin,
@@ -35,4 +39,5 @@ export default {
   incomingGameRequest,
   gameCanceled,
   gameAccepted,
+  readiedUser,
 }

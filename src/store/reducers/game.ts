@@ -12,11 +12,13 @@ interface IPlayer {
 export interface IGame {
   players: IPlayer[]
   totalRound: number
+  readyPlayersForCurrentGame: string[]
 }
 
 const initialState: IGame = {
   players: [],
   totalRound: 0,
+  readyPlayersForCurrentGame: [],
 }
 
 export const game = createSlice({
@@ -38,6 +40,9 @@ export const game = createSlice({
           point: 0,
         },
       ]
+    },
+    addReadyPlayer: (state, action: PayloadAction<string>) => {
+      state.readyPlayersForCurrentGame.push(action.payload)
     },
   },
 })

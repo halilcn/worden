@@ -1,6 +1,6 @@
 import { SOCKET_CHANNELS } from '../constants'
 import store from '../store'
-import { IAcceptGameRequest } from '../types'
+import { IAcceptGameRequest, ISendReadyStatusForGame } from '../types'
 
 const server = store.getState().socketServer.server
 
@@ -24,6 +24,10 @@ const acceptGameRequest = (payload: IAcceptGameRequest) => {
   server.emit(SOCKET_CHANNELS.ACCEPT_GAME_REQUEST, payload)
 }
 
+const sendReadyStatusForGame = (payload: ISendReadyStatusForGame) => {
+  server.emit(SOCKET_CHANNELS.SEND_READY_STATUS_FOR_GAME, payload)
+}
+
 const loginGameRoom = (roomId: string) => {
   server.emit(SOCKET_CHANNELS.LOGIN_GAME_ROOM, roomId)
 }
@@ -40,4 +44,5 @@ export default {
   cancelGameRequest,
   acceptGameRequest,
   loginGameRoom,
+  sendReadyStatusForGame,
 }

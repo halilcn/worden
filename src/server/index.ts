@@ -2,7 +2,7 @@ import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
 import { SOCKET_CHANNELS } from '../constants'
-import { ActiveUserStatus, IAcceptGameRequest, IGameRoom, IServerUser } from '../types'
+import { ActiveUserStatus, IAcceptGameRequest, IGameRoom, ISendReadyStatusForGame, IServerUser } from '../types'
 
 const httpServer = createServer()
 const io = new Server(httpServer)
@@ -69,7 +69,7 @@ io.on('connection', (socket: Socket) => {
       },
       playerTwo: {
         socketId: socket.id,
-        username: users.find(user => user.socketId === payload.gameUserSocketId)?.username,
+        username: users.find(user => user.socketId === socket.id)?.username,
       },
     }
 
@@ -79,7 +79,15 @@ io.on('connection', (socket: Socket) => {
 
   socket.on(SOCKET_CHANNELS.LOGIN_GAME_ROOM, (roomId: string) => {
     socket.join(roomId)
-    console.log('joined room !!!!')
+    console.log('joined room!')
+    console.log(roomId)
+  })
+
+  socket.on(SOCKET_CHANNELS.SEND_READY_STATUS_FOR_GAME, (payload: ISendReadyStatusForGame) => {
+    console.log('ready status')
+    console.log(payload)
+
+    io.to(payload.roomId).emit(SOCKET_CHANNELS.READIED_USER, payload.userSocketId)
   })
 
   socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {

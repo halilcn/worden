@@ -23,6 +23,11 @@ export interface IGameAcceptedPlayer {
   username: string
 }
 
+export interface ISendReadyStatusForGame {
+  roomId: string
+  userSocketId: string
+}
+
 export interface IGameAccepted {
   roomId: string
   playerOne: IGameAcceptedPlayer
