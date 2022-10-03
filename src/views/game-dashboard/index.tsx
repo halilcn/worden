@@ -7,6 +7,9 @@ import GameStarting from '../../components/game-dashboard/game/game-starting/gam
 import Room from '../../components/game-dashboard/room'
 import { ROUTER_PATHS } from '../../constants'
 import { RootState } from '../../store'
+import { auth } from '../../store/reducers/auth'
+import serverEvents from '../../utils/server-events'
+import serverListeners from '../../utils/server-listeners'
 import './index.scss'
 
 enum ACTIVE_COMPONENT_TYPES {
@@ -24,17 +27,16 @@ const GameDashboard = () => {
 
   useEffect(() => {
     if (!gameRoom.roomId) navigate(ROUTER_PATHS.activeUsers)
+
+    serverListeners.gameStarted(words => {
+      alert(words.length)
+    })
   }, [])
 
   useEffect(() => {
     const readyPlayersLength = [...new Set(game.readyPlayersForCurrentGame)].length
 
-    if (readyPlayersLength === 2) {
-      setActiveComponentsType(ACTIVE_COMPONENT_TYPES.GAME_STARTING)
-      setTimeout(() => {
-        setActiveComponentsType(ACTIVE_COMPONENT_TYPES.GAME)
-      }, 3000)
-    }
+    if (readyPlayersLength === 2) gameStartingProcess()
   }, [game.readyPlayersForCurrentGame.length])
 
   const memorizedDynamicContent = useMemo(() => {
@@ -44,6 +46,16 @@ const GameDashboard = () => {
 
     return <Room />
   }, [activeComponentsType])
+
+  const gameStartingProcess = () => {
+    setActiveComponentsType(ACTIVE_COMPONENT_TYPES.GAME_STARTING)
+    setTimeout(() => {
+      setActiveComponentsType(ACTIVE_COMPONENT_TYPES.GAME)
+    }, 3000)
+
+    //TODO: YALNIZCA TEK KİŞİ GÖNDERSİN
+    serverEvents.gameStarting(gameRoom.roomId as string)
+  }
 
   return <div className="game-dashboard">{memorizedDynamicContent}</div>
 }

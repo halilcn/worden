@@ -90,6 +90,10 @@ io.on('connection', (socket: Socket) => {
     io.to(payload.roomId).emit(SOCKET_CHANNELS.READIED_USER, payload.userSocketId)
   })
 
+  socket.on(SOCKET_CHANNELS.GAME_STARTING, (roomId: string) => {
+    io.to(roomId).emit(SOCKET_CHANNELS.GAME_STARTED, [{ test: 'selam' }, { testaa: 'selamasddas' }])
+  })
+
   socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {
     console.log('logout geldi !!!')
     users = users.filter(user => user.username !== username)

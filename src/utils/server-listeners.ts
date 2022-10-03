@@ -32,6 +32,10 @@ const readiedUser = (listener: (userSocketId: string) => void) => {
   return server.on(SOCKET_CHANNELS.READIED_USER, listener)
 }
 
+const gameStarted = (listener: (words: object[]) => void) => {
+  return server.on(SOCKET_CHANNELS.GAME_STARTED, listener)
+}
+
 export default {
   alreadyExistUsername,
   correctUsernameToLogin,
@@ -40,4 +44,5 @@ export default {
   gameCanceled,
   gameAccepted,
   readiedUser,
+  gameStarted,
 }

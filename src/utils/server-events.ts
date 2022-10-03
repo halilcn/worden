@@ -32,6 +32,10 @@ const loginGameRoom = (roomId: string) => {
   server.emit(SOCKET_CHANNELS.LOGIN_GAME_ROOM, roomId)
 }
 
+const gameStarting = (roomId: string) => {
+  server.emit(SOCKET_CHANNELS.GAME_STARTING, roomId)
+}
+
 const disconnect = () => {
   server.disconnect()
 }
@@ -45,4 +49,5 @@ export default {
   acceptGameRequest,
   loginGameRoom,
   sendReadyStatusForGame,
+  gameStarting,
 }
