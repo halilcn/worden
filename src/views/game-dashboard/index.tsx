@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import GamePlace from '../../components/game-dashboard/game/game-place'
@@ -8,6 +8,7 @@ import Room from '../../components/game-dashboard/room'
 import { ROUTER_PATHS } from '../../constants'
 import { RootState } from '../../store'
 import { auth } from '../../store/reducers/auth'
+import { gameActions } from '../../store/reducers/game'
 import serverEvents from '../../utils/server-events'
 import serverListeners from '../../utils/server-listeners'
 import './index.scss'
@@ -20,6 +21,7 @@ enum ACTIVE_COMPONENT_TYPES {
 
 const GameDashboard = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
   const game = useSelector((state: RootState) => state.game)
 
@@ -29,7 +31,11 @@ const GameDashboard = () => {
     if (!gameRoom.roomId) navigate(ROUTER_PATHS.activeUsers)
 
     serverListeners.gameStarted(words => {
-      alert(words.length)
+      const onlyWords = Object.keys(words)
+      const onlyWordAnswers = Object.values(words)
+
+      dispatch(gameActions.setWords(onlyWords))
+      dispatch(gameActions.setWordAnswers(onlyWordAnswers))
     })
   }, [])
 

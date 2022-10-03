@@ -14,6 +14,7 @@ export interface IGame {
   totalRound: number
   readyPlayersForCurrentGame: string[]
   words: string[]
+  wordAnswers: string[]
 }
 
 const initialState: IGame = {
@@ -21,6 +22,7 @@ const initialState: IGame = {
   totalRound: 0,
   readyPlayersForCurrentGame: [],
   words: [],
+  wordAnswers: [],
 }
 
 export const game = createSlice({
@@ -48,6 +50,9 @@ export const game = createSlice({
     },
     setWords: (state, action: PayloadAction<string[]>) => {
       state.words = action.payload
+    },
+    setWordAnswers: (state, action: PayloadAction<string[]>) => {
+      state.wordAnswers = action.payload
     },
   },
 })
