@@ -1,0 +1,19 @@
+@import '../src/styles/mixins';
+
+.send-answer {
+  margin-top: 40px;
+  width: 400px;
+
+  &__input {
+    @include input;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  &__info{
+    font-size: 11px;
+    margin-top: 5px;
+    font-weight: 300;
+    color: #5d5d5d;
+  }
+}

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import GamePlace from '../../components/game-dashboard/game/game-place'
 import GameStarting from '../../components/game-dashboard/game/game-starting/game-starting'
 import Room from '../../components/game-dashboard/room'
 import { ROUTER_PATHS } from '../../constants'
@@ -39,7 +40,7 @@ const GameDashboard = () => {
   const memorizedDynamicContent = useMemo(() => {
     if (activeComponentsType === ACTIVE_COMPONENT_TYPES.ROOM) return <Room />
     if (activeComponentsType === ACTIVE_COMPONENT_TYPES.GAME_STARTING) return <GameStarting />
-    if (activeComponentsType === ACTIVE_COMPONENT_TYPES.GAME) return <div>game place !!</div>
+    if (activeComponentsType === ACTIVE_COMPONENT_TYPES.GAME) return <GamePlace />
 
     return <Room />
   }, [activeComponentsType])
