@@ -1,4 +1,4 @@
-export default {
+const words: { [key: string]: string } = {
   bazı: 'some',
   olduğunu: 'is',
   o: 'it',
@@ -164,3 +164,5 @@ export default {
   yukarıdaki: 'above',
   hiç: 'ever',
 }
+
+export default words

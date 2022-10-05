@@ -1,8 +1,9 @@
 import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
-import { SOCKET_CHANNELS } from '../constants'
+import { GAME_WORDS_LENGTH, SOCKET_CHANNELS } from '../constants'
 import { ActiveUserStatus, IAcceptGameRequest, IGameRoom, ISendReadyStatusForGame, IServerUser } from '../types'
+import words from './words'
 
 const httpServer = createServer()
 const io = new Server(httpServer)
@@ -91,7 +92,17 @@ io.on('connection', (socket: Socket) => {
   })
 
   socket.on(SOCKET_CHANNELS.GAME_STARTING, (roomId: string) => {
-    io.to(roomId).emit(SOCKET_CHANNELS.GAME_STARTED, { test: 'selam', testaa: 'selamasddas' })
+    const turkishWords = Object.keys(words)
+    const selectedRandomTurkishWords = turkishWords
+      .map(x => ({ x, r: Math.random() }))
+      .sort((a, b) => a.r - b.r)
+      .map(a => a.x)
+      .slice(0, GAME_WORDS_LENGTH)
+
+    const randomWords: { [key: string]: string } = {}
+    selectedRandomTurkishWords.forEach(word => (randomWords[word] = words[word]))
+
+    io.to(roomId).emit(SOCKET_CHANNELS.GAME_STARTED, randomWords)
   })
 
   socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {
