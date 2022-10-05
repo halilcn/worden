@@ -59,8 +59,7 @@ const GameDashboard = () => {
       setActiveComponentsType(ACTIVE_COMPONENT_TYPES.GAME)
     }, 3000)
 
-    //TODO: YALNIZCA TEK KİŞİ GÖNDERSİN
-    serverEvents.gameStarting(gameRoom.roomId as string)
+    if (gameRoom.userSocketIdToRequestForGame) serverEvents.gameStarting(gameRoom.roomId as string)
   }
 
   return <div className="game-dashboard">{memorizedDynamicContent}</div>
