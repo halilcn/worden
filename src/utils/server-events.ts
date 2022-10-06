@@ -54,4 +54,5 @@ export default {
   loginGameRoom,
   sendReadyStatusForGame,
   gameStarting,
+  sendPointOfUser,
 }

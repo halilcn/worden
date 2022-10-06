@@ -1,33 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import useCalculateGamePoint from '../../../../../hooks/useCalculateGamePoint'
 import { RootState } from '../../../../../store'
 import { gameActions } from '../../../../../store/reducers/game'
+import { gameRoom } from '../../../../../store/reducers/game-room'
+import { socketServerActions } from '../../../../../store/reducers/socket-server'
+import serverEvents from '../../../../../utils/server-events'
 import './index.scss'
-import { socketServerActions } from "../../../../../store/reducers/socket-server";
 
 const SendAnswer = () => {
   const dispatch = useDispatch()
-  const game = useSelector((state: RootState) => state.game)
 
   const [answer, setAnswer] = useState<string>('')
 
-  useEffect(() => {
-    if (game.currentWordIndex >= 3) {
-      //todo: test mode on
-      //todo: calculate! hooks ?
-
-      const totalPoint = game.wordUserAnswers.map((word, wordIndex) => {
-        const wordUserSplitted = word.split('')
-        const wordAnswer = game.wordAnswers[wordIndex].split('')
-
-        return wordAnswer.filter((wordAnswerCharacter, wordAnswerKey) => wordAnswerCharacter === wordUserSplitted[wordAnswerKey]).length
-      })
-
-      //SOCKET
-
-    }
-  }, [game.currentWordIndex])
+  useCalculateGamePoint()
 
   const handleSaveAnswer = (e: any) => {
     if (e.key === 'Enter') {

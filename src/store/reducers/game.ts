@@ -17,6 +17,7 @@ export interface IGame {
   wordAnswers: string[]
   wordUserAnswers: string[]
   currentWordIndex: number
+  finishedPlayersSocketId: string[]
 }
 
 const initialState: IGame = {
@@ -27,6 +28,7 @@ const initialState: IGame = {
   wordAnswers: [],
   wordUserAnswers: [],
   currentWordIndex: 0,
+  finishedPlayersSocketId: [],
 }
 
 export const game = createSlice({
@@ -63,6 +65,9 @@ export const game = createSlice({
     },
     addWordUserAnswer: (state, action: PayloadAction<string>) => {
       state.wordUserAnswers.push(action.payload)
+    },
+    addFinishedUserSocketId: (state, action: PayloadAction<string>) => {
+      if (!state.finishedPlayersSocketId.includes(action.payload)) state.finishedPlayersSocketId.push(action.payload)
     },
   },
 })
