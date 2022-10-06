@@ -5,6 +5,7 @@ import CurrentWord from './current-word'
 import './index.scss'
 import RemainingTime from './remaining-time'
 import SendAnswer from './send-answer'
+import WaitingUserToFinish from './waiting-user-to-finish'
 
 const GamePlace = () => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const GamePlace = () => {
       <RemainingTime />
       <CurrentWord />
       <SendAnswer />
+      <WaitingUserToFinish />
     </div>
   )
 }
