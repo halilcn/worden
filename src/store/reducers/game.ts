@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-import { IGameAccepted, IServerUser } from '../../types'
+import { GAME_ACTIVE_PAGE, IGameAccepted } from '../../types'
 
 interface IPlayer {
   userSocketId: string
@@ -18,6 +18,7 @@ export interface IGame {
   wordUserAnswers: string[]
   currentWordIndex: number
   finishedPlayersSocketId: string[]
+  activePage: GAME_ACTIVE_PAGE
 }
 
 const initialState: IGame = {
@@ -29,6 +30,7 @@ const initialState: IGame = {
   wordUserAnswers: [],
   currentWordIndex: 0,
   finishedPlayersSocketId: [],
+  activePage: GAME_ACTIVE_PAGE.ROOM,
 }
 
 export const game = createSlice({
@@ -68,6 +70,9 @@ export const game = createSlice({
     },
     addFinishedUserSocketId: (state, action: PayloadAction<string>) => {
       if (!state.finishedPlayersSocketId.includes(action.payload)) state.finishedPlayersSocketId.push(action.payload)
+    },
+    setActivePage: (state, action: PayloadAction<GAME_ACTIVE_PAGE>) => {
+      state.activePage = action.payload
     },
   },
 })

@@ -39,3 +39,9 @@ export interface ISendPointOfUser {
   userSocketId: string
   point: number
 }
+
+export enum GAME_ACTIVE_PAGE {
+  GAME_STARTING = 'GAME_STARTING',
+  ROOM = 'ROOM',
+  GAME = 'GAME',
+}
