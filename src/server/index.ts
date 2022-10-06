@@ -2,7 +2,7 @@ import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
 import { GAME_WORDS_LENGTH, SOCKET_CHANNELS } from '../constants'
-import { ActiveUserStatus, IAcceptGameRequest, IGameRoom, ISendReadyStatusForGame, IServerUser } from '../types'
+import { ActiveUserStatus, IAcceptGameRequest, IGameRoom, ISendPointOfUser, ISendReadyStatusForGame, IServerUser } from '../types'
 import words from './words'
 
 const httpServer = createServer()
@@ -103,6 +103,10 @@ io.on('connection', (socket: Socket) => {
     selectedRandomTurkishWords.forEach(word => (randomWords[word] = words[word]))
 
     io.to(roomId).emit(SOCKET_CHANNELS.GAME_STARTED, randomWords)
+  })
+
+  socket.on(SOCKET_CHANNELS.SEND_POINT_OF_USER, (payload: ISendPointOfUser) => {
+    io.to(payload.roomId).emit(SOCKET_CHANNELS.POINT_OF_USER, payload)
   })
 
   socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {

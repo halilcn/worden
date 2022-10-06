@@ -33,3 +33,9 @@ export interface IGameAccepted {
   playerOne: IGameAcceptedPlayer
   playerTwo: IGameAcceptedPlayer
 }
+
+export interface ISendPointOfUser {
+  roomId: string
+  userSocketId: string
+  point: number
+}

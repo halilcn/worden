@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../../store'
 import { gameActions } from '../../../../../store/reducers/game'
 import './index.scss'
+import { socketServerActions } from "../../../../../store/reducers/socket-server";
 
 const SendAnswer = () => {
   const dispatch = useDispatch()
@@ -16,14 +17,15 @@ const SendAnswer = () => {
       //todo: test mode on
       //todo: calculate! hooks ?
 
-      const test = game.wordUserAnswers.map((word, wordIndex) => {
+      const totalPoint = game.wordUserAnswers.map((word, wordIndex) => {
         const wordUserSplitted = word.split('')
         const wordAnswer = game.wordAnswers[wordIndex].split('')
 
         return wordAnswer.filter((wordAnswerCharacter, wordAnswerKey) => wordAnswerCharacter === wordUserSplitted[wordAnswerKey]).length
       })
 
-      console.log(test)
+      //SOCKET
+
     }
   }, [game.currentWordIndex])
 

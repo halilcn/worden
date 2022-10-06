@@ -1,6 +1,6 @@
 import { SOCKET_CHANNELS } from '../constants'
 import store from '../store'
-import { IGameAccepted, IServerUser } from '../types'
+import { IGameAccepted, ISendPointOfUser, IServerUser } from '../types'
 
 const server = store.getState().socketServer.server
 
@@ -36,6 +36,10 @@ const gameStarted = (listener: (words: object) => void) => {
   return server.on(SOCKET_CHANNELS.GAME_STARTED, listener)
 }
 
+const pointOfUser = (listener: (payload: ISendPointOfUser) => void) => {
+  return server.on(SOCKET_CHANNELS.POINT_OF_USER, listener)
+}
+
 export default {
   alreadyExistUsername,
   correctUsernameToLogin,
@@ -45,4 +49,5 @@ export default {
   gameAccepted,
   readiedUser,
   gameStarted,
+  pointOfUser,
 }

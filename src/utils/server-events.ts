@@ -1,6 +1,6 @@
 import { SOCKET_CHANNELS } from '../constants'
 import store from '../store'
-import { IAcceptGameRequest, ISendReadyStatusForGame } from '../types'
+import { IAcceptGameRequest, ISendPointOfUser, ISendReadyStatusForGame } from '../types'
 
 const server = store.getState().socketServer.server
 
@@ -34,6 +34,10 @@ const loginGameRoom = (roomId: string) => {
 
 const gameStarting = (roomId: string) => {
   server.emit(SOCKET_CHANNELS.GAME_STARTING, roomId)
+}
+
+const sendPointOfUser = (payload: ISendPointOfUser) => {
+  server.emit(SOCKET_CHANNELS.SEND_POINT_OF_USER, payload)
 }
 
 const disconnect = () => {
