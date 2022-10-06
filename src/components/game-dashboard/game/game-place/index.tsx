@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from '../../../../store'
 import { gameActions } from '../../../../store/reducers/game'
+import { GAME_ACTIVE_PAGE } from '../../../../types'
 import serverListeners from '../../../../utils/server-listeners'
 import CurrentWord from './current-word'
 import './index.scss'
@@ -19,6 +20,7 @@ const GamePlace = () => {
   useEffect(() => {
     serverListeners.pointOfUser(payload => {
       dispatch(gameActions.addFinishedUserSocketId(auth.socketId))
+      dispatch(gameActions.addPointOfUser(payload))
 
       //todo: burada pointleri koy
       console.log('user point !!!')
@@ -27,10 +29,9 @@ const GamePlace = () => {
   }, [])
 
   useEffect(() => {
-    //todo: yönlendir.
+    if (game.finishedPlayersSocketId.length === 2) dispatch(gameActions.setActivePage(GAME_ACTIVE_PAGE.ROOM))
   }, [game.finishedPlayersSocketId.length])
 
-  //todo: rakip bekleniyor
   return (
     <div className="game-place">
       <RemainingTime />

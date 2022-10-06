@@ -3,6 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { GAME_ACTIVE_PAGE, IGameAccepted } from '../../types'
 
+interface IAddPointOfUser {
+  userSocketId: string
+  point: number
+}
+
 interface IPlayer {
   userSocketId: string
   username: string
@@ -73,6 +78,14 @@ export const game = createSlice({
     },
     setActivePage: (state, action: PayloadAction<GAME_ACTIVE_PAGE>) => {
       state.activePage = action.payload
+    },
+    addPointOfUser: (state, action: PayloadAction<IAddPointOfUser>) => {
+      state.players.map(player => {
+        if (player.userSocketId !== action.payload.userSocketId) return player
+
+        player.point += action.payload.point
+        return player
+      })
     },
   },
 })
