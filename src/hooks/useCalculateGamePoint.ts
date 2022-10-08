@@ -6,6 +6,7 @@ import store, { RootState } from '../store'
 import { gameActions } from '../store/reducers/game'
 import serverEvents from '../utils/server-events'
 
+//TODO: ? -1 default ?
 const useCalculateGamePoint = (remainingTime: number = -1) => {
   const dispatch = useDispatch()
 
@@ -14,14 +15,19 @@ const useCalculateGamePoint = (remainingTime: number = -1) => {
   const auth = useSelector((state: RootState) => state.auth)
 
   const processCalculatePoint = () => {
-    const totalPoint = game.wordUserAnswers
-      .map((word, wordIndex) => {
-        const wordUserSplitted = word.split('')
-        const wordAnswer = game.wordAnswers[wordIndex].split('')
+    //TODO: review
+    const totalPoint =
+      game.wordUserAnswers.length === 0
+        ? 0
+        : game.wordUserAnswers
+            .map((word, wordIndex) => {
+              const wordUserSplitted = word.split('')
+              const wordAnswer = game.wordAnswers[wordIndex].split('')
 
-        return wordAnswer.filter((wordAnswerCharacter, wordAnswerKey) => wordAnswerCharacter === wordUserSplitted[wordAnswerKey]).length
-      })
-      .reduce((a, b) => a + b)
+              return wordAnswer.filter((wordAnswerCharacter, wordAnswerKey) => wordAnswerCharacter === wordUserSplitted[wordAnswerKey])
+                .length
+            })
+            .reduce((a, b) => a + b)
 
     console.log(totalPoint)
 

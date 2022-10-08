@@ -1,35 +1,31 @@
 import { useEffect, useState } from 'react'
 
-import { MAX_REMAINING_TIME, MIN_REMAINING_TIME } from '../../../../../constants'
+import { MAX_REMAINING_TIME } from '../../../../../constants'
 import useCalculateGamePoint from '../../../../../hooks/useCalculateGamePoint'
 import './index.scss'
 
 const RemainingTime = () => {
   const [remainingTime, setRemainingTime] = useState<number>(MAX_REMAINING_TIME)
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setRemainingTime(time => time - 1)
-    }, 1000)
-
-    return () => clearInterval(intervalId)
-  }, [])
-
   useCalculateGamePoint(remainingTime)
 
-  //TODO: remaining time error ?
+  useEffect(() => {
+    const intervalRemainingTime = setInterval(() => {
+      setRemainingTime(time => time - 0.5)
+    }, 500)
 
-  /* useEffect(() => {
-    if (remainingTime === MIN_REMAINING_TIME) {
+    return () => clearInterval(intervalRemainingTime)
+  }, [])
 
-    }
-  }, [remainingTime])*/
+  const calculateRemainingPercentage = (time: number) => {
+    return (time * 100) / MAX_REMAINING_TIME
+  }
 
   return (
     <div className="remaining-time">
-      <div className="remaining-time__number">{remainingTime}</div>
+      <div className="remaining-time__number">{remainingTime.toFixed(0)}</div>
       <div className="remaining-time__bar">
-        <div style={{ width: `${remainingTime - 20}%` }} className="remaining-time__current-time-bar" />
+        <div style={{ width: `${calculateRemainingPercentage(remainingTime)}%` }} className="remaining-time__current-time-bar" />
       </div>
     </div>
   )
