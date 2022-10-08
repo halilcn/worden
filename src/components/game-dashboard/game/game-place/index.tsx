@@ -27,8 +27,9 @@ const GamePlace = () => {
 
   useEffect(() => {
     if (game.finishedPlayersSocketId.length === EXPECTED_PLAYERS_COUNT_IN_ROOM) {
-      dispatch(gameActions.prepareForNewGame())
-      dispatch(gameActions.setActivePage(GAME_ACTIVE_PAGE.ROOM))
+      setTimeout(() => {
+        dispatch(gameActions.setActivePage(GAME_ACTIVE_PAGE.ROOM))
+      }, 1000)
     }
   }, [game.finishedPlayersSocketId.length])
 

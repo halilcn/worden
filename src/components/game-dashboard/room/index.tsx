@@ -12,6 +12,8 @@ const Room = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(gameActions.prepareForNewGame())
+
     serverListeners.readiedUser(userSocketId => {
       dispatch(gameActions.addReadyPlayer(userSocketId))
     })

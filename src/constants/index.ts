@@ -30,7 +30,7 @@ export const SOCKET_CHANNELS = {
   POINT_OF_USER: 'POINT_OF_USER',
 }
 
-export const GAME_WORDS_LENGTH = 3
+export const GAME_WORDS_LENGTH = 20
 
 export const EXPECTED_PLAYERS_COUNT_IN_ROOM = 2
 
