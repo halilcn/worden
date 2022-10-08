@@ -26,8 +26,6 @@ export interface IGame {
   activePage: GAME_ACTIVE_PAGE
 }
 
-//todo:game starting ? like actions ?
-
 const initialState: IGame = {
   players: [],
   totalRound: 0,
@@ -89,11 +87,14 @@ export const game = createSlice({
         return player
       })
     },
-    finishGame: state => {
+    prepareForNewGame: state => {
       state.words = []
       state.wordAnswers = []
       state.wordUserAnswers = []
+      state.readyPlayersForCurrentGame = []
+      state.finishedPlayersSocketId = []
       state.currentWordIndex = 0
+      state.totalRound++
     },
   },
 })
