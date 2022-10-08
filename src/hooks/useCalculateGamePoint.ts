@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { GAME_WORDS_LENGTH } from '../constants'
+import { GAME_WORDS_LENGTH, MIN_REMAINING_TIME } from '../constants'
 import store, { RootState } from '../store'
 import { gameActions } from '../store/reducers/game'
 import serverEvents from '../utils/server-events'
 
-const useCalculateGamePoint = () => {
+const useCalculateGamePoint = (remainingTime: number = -1) => {
   const dispatch = useDispatch()
 
   const game = useSelector((state: RootState) => state.game)
@@ -29,10 +29,9 @@ const useCalculateGamePoint = () => {
   }
 
   useEffect(() => {
-    if (game.currentWordIndex < GAME_WORDS_LENGTH - 1) return
-
-    processCalculatePoint()
-  }, [game.currentWordIndex])
+    if (game.currentWordIndex === GAME_WORDS_LENGTH - 1) processCalculatePoint()
+    if (remainingTime === MIN_REMAINING_TIME) processCalculatePoint()
+  }, [game.currentWordIndex, remainingTime])
 }
 
 export default useCalculateGamePoint
