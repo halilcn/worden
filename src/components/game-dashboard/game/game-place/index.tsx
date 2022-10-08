@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { EXPECTED_PLAYERS_COUNT_IN_ROOM } from '../../../../constants'
 import { RootState } from '../../../../store'
 import { gameActions } from '../../../../store/reducers/game'
 import { GAME_ACTIVE_PAGE } from '../../../../types'
@@ -25,7 +26,7 @@ const GamePlace = () => {
   }, [])
 
   useEffect(() => {
-    if (game.finishedPlayersSocketId.length === 2) {
+    if (game.finishedPlayersSocketId.length === EXPECTED_PLAYERS_COUNT_IN_ROOM) {
       dispatch(gameActions.prepareForNewGame())
       dispatch(gameActions.setActivePage(GAME_ACTIVE_PAGE.ROOM))
     }

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import GamePlace from '../../components/game-dashboard/game/game-place'
 import GameStarting from '../../components/game-dashboard/game/game-starting/game-starting'
 import Room from '../../components/game-dashboard/room'
-import { ROUTER_PATHS } from '../../constants'
+import { EXPECTED_PLAYERS_COUNT_IN_ROOM, ROUTER_PATHS } from "../../constants";
 import { RootState } from '../../store'
 import { gameActions } from '../../store/reducers/game'
 import { GAME_ACTIVE_PAGE } from '../../types'
@@ -35,7 +35,7 @@ const GameDashboard = () => {
   useEffect(() => {
     const readyPlayersLength = [...new Set(game.readyPlayersForCurrentGame)].length
 
-    if (readyPlayersLength === 2) gameStartingProcess()
+    if (readyPlayersLength === EXPECTED_PLAYERS_COUNT_IN_ROOM) gameStartingProcess()
   }, [game.readyPlayersForCurrentGame.length])
 
   const memorizedDynamicContent = useMemo(() => {

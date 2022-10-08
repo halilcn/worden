@@ -31,3 +31,5 @@ export const SOCKET_CHANNELS = {
 }
 
 export const GAME_WORDS_LENGTH = 3
+
+export const EXPECTED_PLAYERS_COUNT_IN_ROOM = 2
