@@ -19,7 +19,7 @@ const GamePlace = () => {
 
   useEffect(() => {
     serverListeners.pointOfUser(payload => {
-      dispatch(gameActions.addFinishedUserSocketId(auth.socketId))
+      dispatch(gameActions.addFinishedUserSocketId(payload.userSocketId))
       dispatch(gameActions.addPointOfUser(payload))
 
       //todo: burada pointleri koy
@@ -34,10 +34,17 @@ const GamePlace = () => {
 
   return (
     <div className="game-place">
-      <RemainingTime />
-      <CurrentWord />
-      <SendAnswer />
-      <WaitingUserToFinish />
+      {game.words.length > 0 ? (
+        <div className="game-place__section">
+          <RemainingTime />
+          <CurrentWord />
+          <SendAnswer />
+        </div>
+      ) : (
+        <div className="game-place__section">
+          <WaitingUserToFinish />
+        </div>
+      )}
     </div>
   )
 }

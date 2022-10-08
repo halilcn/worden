@@ -1,5 +1,7 @@
 .game-place {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  &__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

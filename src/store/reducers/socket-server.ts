@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import { Socket } from 'socket.io-client'
 import io from 'socket.io-client'
 

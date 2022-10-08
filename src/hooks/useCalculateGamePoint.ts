@@ -32,6 +32,7 @@ const useCalculateGamePoint = () => {
     if (game.currentWordIndex < GAME_WORDS_LENGTH - 1) return
 
     processCalculatePoint()
+    dispatch(gameActions.finishGame())
   }, [game.currentWordIndex])
 }
 
