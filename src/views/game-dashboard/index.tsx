@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import GamePlace from '../../components/game-dashboard/game/game-place'
 import GameStarting from '../../components/game-dashboard/game/game-starting/game-starting'
 import Room from '../../components/game-dashboard/room'
-import { EXPECTED_PLAYERS_COUNT_IN_ROOM, ROUTER_PATHS } from "../../constants";
+import { EXPECTED_PLAYERS_COUNT_IN_ROOM, ROUTER_PATHS } from '../../constants'
 import { RootState } from '../../store'
 import { gameActions } from '../../store/reducers/game'
 import { GAME_ACTIVE_PAGE } from '../../types'
@@ -50,7 +50,7 @@ const GameDashboard = () => {
     dispatch(gameActions.setActivePage(GAME_ACTIVE_PAGE.GAME_STARTING))
     setTimeout(() => {
       dispatch(gameActions.setActivePage(GAME_ACTIVE_PAGE.GAME))
-    }, 3000)
+    }, 4500)
 
     if (gameRoom.userSocketIdToRequestForGame) serverEvents.gameStarting(gameRoom.roomId as string)
   }
