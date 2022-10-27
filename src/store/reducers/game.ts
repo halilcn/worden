@@ -94,6 +94,8 @@ export const game = createSlice({
       state.readyPlayersForCurrentGame = []
       state.finishedPlayersSocketId = []
       state.currentWordIndex = 0
+    },
+    increaseTotalRound: state => {
       state.totalRound++
     },
   },
