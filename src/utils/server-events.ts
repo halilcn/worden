@@ -40,6 +40,10 @@ const sendPointOfUser = (payload: ISendPointOfUser) => {
   server.emit(SOCKET_CHANNELS.SEND_POINT_OF_USER, payload)
 }
 
+const sendRequestLogoutGameRoom = (roomId: string) => {
+  server.emit(SOCKET_CHANNELS.SEND_REQUEST_LOGOUT_GAME_ROOM, roomId)
+}
+
 const disconnect = () => {
   server.disconnect()
 }
@@ -55,4 +59,5 @@ export default {
   sendReadyStatusForGame,
   gameStarting,
   sendPointOfUser,
+  sendRequestLogoutGameRoom,
 }

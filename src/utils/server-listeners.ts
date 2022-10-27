@@ -40,6 +40,10 @@ const pointOfUser = (listener: (payload: ISendPointOfUser) => void) => {
   return server.on(SOCKET_CHANNELS.POINT_OF_USER, listener)
 }
 
+const logoutGameRoom = (listener: () => void) => {
+  return server.on(SOCKET_CHANNELS.LOGOUT_GAME_ROOM, listener)
+}
+
 export default {
   alreadyExistUsername,
   correctUsernameToLogin,
@@ -50,4 +54,5 @@ export default {
   readiedUser,
   gameStarted,
   pointOfUser,
+  logoutGameRoom,
 }

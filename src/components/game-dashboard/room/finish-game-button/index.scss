@@ -1,0 +1,18 @@
+.finish-game-button{
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__element{
+        color: rgb(238, 44, 44);
+        padding: 15px 25px;
+        cursor: pointer;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}

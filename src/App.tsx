@@ -9,14 +9,11 @@ import './styles/index.scss'
 import serverActions from './utils/server-events'
 import serverListeners from './utils/server-listeners'
 
-//TODO: game started olduğunda total round 2 oluyor ?
-//TODO: total round 2'şer artıyor ?
 //TODO: oyunu erken bitirene ek puan olayı ?
-//TODO: oyunda exit etme ? buton yok. 
 //TODO: broweser destroy edildiğinde user logout olmuyor.
 //TODO: login olmadan, girmemesi gerek page'lere girebiliyor.
 //TODO: puanlamada 2 kere socket.on dinleniyor gibi ?
-//TODO: game point calculate nasıl çalışıyor ? code review 
+//TODO: game point calculate nasıl çalışıyor ? code review
 //TODO: word list'e yeni kelime ekle
 
 const App = () => {

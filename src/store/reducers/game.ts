@@ -98,6 +98,16 @@ export const game = createSlice({
     increaseTotalRound: state => {
       state.totalRound++
     },
+    logoutFromGame: state => {
+      state.players = []
+      state.totalRound = 0
+      state.wordUserAnswers = []
+      state.readyPlayersForCurrentGame = []
+      state.finishedPlayersSocketId = []
+      state.currentWordIndex = 0
+      state.words = []
+      state.wordAnswers = []
+    },
   },
 })
 

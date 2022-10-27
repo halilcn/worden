@@ -84,6 +84,29 @@ io.on('connection', (socket: Socket) => {
     console.log(roomId)
   })
 
+  socket.on(SOCKET_CHANNELS.SEND_REQUEST_LOGOUT_GAME_ROOM, (roomId: string) => {
+    io.to(roomId).emit(SOCKET_CHANNELS.LOGOUT_GAME_ROOM)
+
+    const usersIdOnRoom = io.sockets.adapter.rooms.get(roomId)
+
+    //TODO: performance ? code review
+    if (usersIdOnRoom) {
+      for (const id of usersIdOnRoom) {
+        console.log('aşağıdaki user socket id bro')
+
+        console.log(id)
+
+        users.map(user => {
+          if (user.socketId === id) user.status = ActiveUserStatus.IDLE
+          return user
+        })
+      }
+    }
+
+    socket.leave(roomId)
+    io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
+  })
+
   socket.on(SOCKET_CHANNELS.SEND_READY_STATUS_FOR_GAME, (payload: ISendReadyStatusForGame) => {
     console.log('ready status')
     console.log(payload)

@@ -36,6 +36,7 @@ export const gameRoom = createSlice({
       state.activeUsers = action.payload
     },
     leaveFromRoom: state => {
+      state.roomId = null
       state.userSocketIdToRequestForGame = null
       state.userSocketIdToIncomingForGame = null
     },
