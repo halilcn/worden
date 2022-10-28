@@ -16,9 +16,13 @@ import './index.scss'
 const ActiveUsers = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
+  const auth = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
+    if (!auth.socketId) navigate(ROUTER_PATHS.welcome)
+
     serverListeners.gameCanceled(() => {
       dispatch(gameRoomActions.leaveFromRoom())
     })

@@ -11,7 +11,6 @@ import serverListeners from './utils/server-listeners'
 
 //TODO: oyunu erken bitirene ek puan olayı ?
 //TODO: broweser destroy edildiğinde user logout olmuyor.
-//TODO: login olmadan, girmemesi gerek page'lere girebiliyor.
 //TODO: puanlamada 2 kere socket.on dinleniyor gibi ?
 //TODO: game point calculate nasıl çalışıyor ? code review
 //TODO: word list'e yeni kelime ekle

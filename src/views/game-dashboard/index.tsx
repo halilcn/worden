@@ -19,8 +19,10 @@ const GameDashboard = () => {
 
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
   const game = useSelector((state: RootState) => state.game)
+  const auth = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
+    if (!auth.socketId) navigate(ROUTER_PATHS.welcome)
     if (!gameRoom.roomId) navigate(ROUTER_PATHS.activeUsers)
 
     serverListeners.gameStarted(words => {
