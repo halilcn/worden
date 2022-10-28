@@ -1,20 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import useCalculateGamePoint from '../../../../../hooks/useCalculateGamePoint'
-import { RootState } from '../../../../../store'
 import { gameActions } from '../../../../../store/reducers/game'
-import { gameRoom } from '../../../../../store/reducers/game-room'
-import { socketServerActions } from '../../../../../store/reducers/socket-server'
-import serverEvents from '../../../../../utils/server-events'
 import './index.scss'
 
 const SendAnswer = () => {
   const dispatch = useDispatch()
 
   const [answer, setAnswer] = useState<string>('')
-
-  useCalculateGamePoint()
 
   const handleSaveAnswer = (e: any) => {
     if (e.key === 'Enter') {
