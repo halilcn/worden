@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { GAME_WORDS_LENGTH, MIN_REMAINING_TIME } from '../constants'
+import { GAME_WORDS_LENGTH, MIN_REMAINING_TIME, REMANING_TIME_POINT } from '../constants'
 import { RootState } from '../store'
 import serverEvents from '../utils/server-events'
 
-const useCalculateGamePoint = (remainingTime: number = -1) => {
+const useCalculateGamePoint = (remainingTime: number) => {
   const game = useSelector((state: RootState) => state.game)
   const gameRoom = useSelector((state: RootState) => state.gameRoom)
   const auth = useSelector((state: RootState) => state.auth)
@@ -23,6 +23,8 @@ const useCalculateGamePoint = (remainingTime: number = -1) => {
         })
         .reduce((a, b) => a + b)
     }
+
+    if (remainingTime != 0) totalPoint += REMANING_TIME_POINT
 
     serverEvents.sendPointOfUser({ roomId: gameRoom.roomId as string, userSocketId: auth.socketId, point: totalPoint })
   }

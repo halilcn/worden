@@ -7,9 +7,7 @@ import { gameRoomActions } from './store/reducers/game-room'
 import './styles/index.scss'
 import serverListeners from './utils/server-listeners'
 
-//TODO: oyunu erken bitirene ek puan olayı ?
 //TODO: puanlamada 2 kere socket.on dinleniyor gibi ?
-//TODO: game point calculate nasıl çalışıyor ? code review
 
 const App = () => {
   const router = createBrowserRouter(routes)
