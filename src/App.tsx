@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { USERNAME_LOCALSTORAGE } from './constants'
 import routes from './routes'
 import { gameRoomActions } from './store/reducers/game-room'
 import './styles/index.scss'
-import serverActions from './utils/server-events'
 import serverListeners from './utils/server-listeners'
 
 //TODO: oyunu erken bitirene ek puan olayı ?
-//TODO: broweser destroy edildiğinde user logout olmuyor.
 //TODO: puanlamada 2 kere socket.on dinleniyor gibi ?
 //TODO: game point calculate nasıl çalışıyor ? code review
 //TODO: word list'e yeni kelime ekle
@@ -23,15 +20,6 @@ const App = () => {
     serverListeners.activeUsers(activeUsers => {
       dispatch(gameRoomActions.setActiveUsers(activeUsers))
     })
-
-    return () => {
-      const username = localStorage.getItem(USERNAME_LOCALSTORAGE)
-
-      if (username) {
-        serverActions.logout(username)
-        localStorage.removeItem(USERNAME_LOCALSTORAGE)
-      }
-    }
   }, [])
 
   return (

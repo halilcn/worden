@@ -132,13 +132,10 @@ io.on('connection', (socket: Socket) => {
     io.to(payload.roomId).emit(SOCKET_CHANNELS.POINT_OF_USER, payload)
   })
 
-  socket.on(SOCKET_CHANNELS.LOGOUT, (username: string) => {
-    console.log('logout geldi !!!')
-    users = users.filter(user => user.username !== username)
-    io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
-  })
-
   socket.on(SOCKET_CHANNELS.DISCONNECT, () => {
+    users = users.filter(user => user.socketId != socket.id)
+    io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
+
     console.log('DİSCONNECCT ÇAILIŞTI !')
   })
 
