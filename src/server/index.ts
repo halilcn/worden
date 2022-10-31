@@ -1,27 +1,22 @@
 import { createServer } from 'http'
 import { Server, Socket } from 'socket.io'
 
-import { GAME_WORDS_LENGTH, SOCKET_CHANNELS } from '../constants'
+import { GAME_WORDS_LENGTH, SERVER_PORT, SOCKET_CHANNELS } from '../constants'
 import { ActiveUserStatus, IAcceptGameRequest, IGameRoom, ISendPointOfUser, ISendReadyStatusForGame, IServerUser } from '../types'
 import words from './words'
 
 const httpServer = createServer()
 const io = new Server(httpServer)
 
-console.log('server running...')
+console.log('Socket server is running...')
 
 let users: IServerUser[] = []
-let gameRoom: IGameRoom[] = []
 
 io.on('connection', (socket: Socket) => {
-  console.log('birisi geldi')
-
   socket.on(SOCKET_CHANNELS.LOGIN, (username: string) => {
     const alreadyExistsUsername = users.find(user => user.username === username)
 
     if (alreadyExistsUsername) {
-      console.log('already exists')
-      console.log(users)
       io.to(socket.id).emit(SOCKET_CHANNELS.ALREADY_EXIST_USERNAME)
       return
     }
@@ -30,9 +25,6 @@ io.on('connection', (socket: Socket) => {
 
     io.to(socket.id).emit(SOCKET_CHANNELS.CORRECT_USERNAME_TO_LOGIN, socket.id)
     io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
-
-    console.log('login selam!')
-    console.log(socket.id)
   })
 
   socket.on(SOCKET_CHANNELS.SEND_GAME_REQUEST, (fromSocketId: string) => {
@@ -51,16 +43,11 @@ io.on('connection', (socket: Socket) => {
       return user
     })
 
-    console.log(gameUserSocketId)
-    console.log(socket.id)
-
     io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
     io.to(gameUserSocketId).to(socket.id).emit(SOCKET_CHANNELS.GAME_CANCELED)
   })
 
   socket.on(SOCKET_CHANNELS.ACCEPT_GAME_REQUEST, (payload: IAcceptGameRequest) => {
-    console.log('accepted game! The game is starting....')
-
     const { roomId, gameUserSocketId } = payload
     const emitPayload = {
       roomId,
@@ -80,8 +67,6 @@ io.on('connection', (socket: Socket) => {
 
   socket.on(SOCKET_CHANNELS.LOGIN_GAME_ROOM, (roomId: string) => {
     socket.join(roomId)
-    console.log('joined room!')
-    console.log(roomId)
   })
 
   socket.on(SOCKET_CHANNELS.SEND_REQUEST_LOGOUT_GAME_ROOM, (roomId: string) => {
@@ -89,13 +74,8 @@ io.on('connection', (socket: Socket) => {
 
     const usersIdOnRoom = io.sockets.adapter.rooms.get(roomId)
 
-    //TODO: performance ? code review
     if (usersIdOnRoom) {
       for (const id of usersIdOnRoom) {
-        console.log('aşağıdaki user socket id bro')
-
-        console.log(id)
-
         users.map(user => {
           if (user.socketId === id) user.status = ActiveUserStatus.IDLE
           return user
@@ -108,9 +88,6 @@ io.on('connection', (socket: Socket) => {
   })
 
   socket.on(SOCKET_CHANNELS.SEND_READY_STATUS_FOR_GAME, (payload: ISendReadyStatusForGame) => {
-    console.log('ready status')
-    console.log(payload)
-
     io.to(payload.roomId).emit(SOCKET_CHANNELS.READIED_USER, payload.userSocketId)
   })
 
@@ -135,11 +112,7 @@ io.on('connection', (socket: Socket) => {
   socket.on(SOCKET_CHANNELS.DISCONNECT, () => {
     users = users.filter(user => user.socketId != socket.id)
     io.emit(SOCKET_CHANNELS.ACTIVE_USERS, users)
-
-    console.log('DİSCONNECCT ÇAILIŞTI !')
   })
-
-  //io.to(socket.id).emit();
 })
 
-httpServer.listen(3000)
+httpServer.listen(SERVER_PORT)

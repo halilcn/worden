@@ -8,6 +8,8 @@ export const ROUTER_PATHS = {
 
 export const SOCKET_SERVER_URL = 'http://127.0.0.1:3000'
 
+export const SERVER_PORT = 3000
+
 export const SOCKET_CHANNELS = {
   LOGIN: 'LOGIN',
   DISCONNECT: 'disconnect',
@@ -37,6 +39,6 @@ export const EXPECTED_PLAYERS_COUNT_IN_ROOM = 2
 
 export const MIN_REMAINING_TIME = 0
 
-export const MAX_REMAINING_TIME = 120
+export const MAX_REMAINING_TIME = 60
 
 export const REMANING_TIME_POINT = 7
