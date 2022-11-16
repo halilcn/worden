@@ -8,8 +8,7 @@
     "dev-frontend": "vite",
     "dev-server": "ts-node --experimental-specifier-resolution=node src/server/index.ts",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "heroku-postbuild": "npm install"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.4.7",
