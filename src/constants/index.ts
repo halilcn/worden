@@ -1,3 +1,7 @@
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 export const USERNAME_LOCALSTORAGE = 'USERNAME_LOCALSTORAGE'
 
 export const ROUTER_PATHS = {
@@ -6,7 +10,7 @@ export const ROUTER_PATHS = {
   game: '/game',
 }
 
-export const SOCKET_SERVER_URL = 'http://127.0.0.1:3000'
+export const SOCKET_SERVER_URL = process.env.SOCKET_SERVER_URL || 'http://localhost:3000'
 
 export const SERVER_PORT = 3000
 
