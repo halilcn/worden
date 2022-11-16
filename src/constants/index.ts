@@ -1,7 +1,3 @@
-import dotenv from 'dotenv'
-
-dotenv.config()
-
 export const USERNAME_LOCALSTORAGE = 'USERNAME_LOCALSTORAGE'
 
 export const ROUTER_PATHS = {
@@ -10,7 +6,7 @@ export const ROUTER_PATHS = {
   game: '/game',
 }
 
-export const SOCKET_SERVER_URL = process.env.SOCKET_SERVER_URL || 'http://localhost:3000'
+export const SOCKET_SERVER_URL = 'https://shielded-oasis-08953.herokuapp.com'
 
 export const SERVER_PORT = 3000
 
