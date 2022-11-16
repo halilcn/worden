@@ -14,6 +14,8 @@ let users: IServerUser[] = []
 
 io.on('connection', (socket: Socket) => {
   socket.on(SOCKET_CHANNELS.LOGIN, (username: string) => {
+    console.log('Connected a user!')
+
     const alreadyExistsUsername = users.find(user => user.username === username)
 
     if (alreadyExistsUsername) {
@@ -115,4 +117,4 @@ io.on('connection', (socket: Socket) => {
   })
 })
 
-httpServer.listen(SERVER_PORT)
+httpServer.listen(process.env.PORT || SERVER_PORT)
