@@ -7,6 +7,7 @@ import { RootState } from '../../../store'
 import { authActions } from '../../../store/reducers/auth'
 import serverEvents from '../../../utils/server-events'
 import serverListeners from '../../../utils/server-listeners'
+import './index.scss'
 
 const Welcome = () => {
   const dispatch = useDispatch()
