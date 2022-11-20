@@ -1,62 +1,28 @@
-import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 
-import { ROUTER_PATHS, USERNAME_LOCALSTORAGE } from '../../constants'
+import WaitingServer from '../../components/welcome-user/waiting-server'
+import Welcome from '../../components/welcome-user/welcome'
 import { RootState } from '../../store'
-import { authActions } from '../../store/reducers/auth'
-import serverEvents from '../../utils/server-events'
-import serverListeners from '../../utils/server-listeners'
 import './index.scss'
 
+enum ActiveContent {
+  welcome = 'welcome',
+  waitingServer = 'waitingServer',
+  timeoutServer = 'timeoutServer',
+}
+
 const WelcomeUser = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const authState = useSelector((state: RootState) => state.auth)
+  const socketServerState = useSelector((state: RootState) => state.socketServer)
 
-  const [alreadyExist, setAlreadyExist] = useState<boolean>(false)
+  const [activeContent, setActiveContent] = useState<ActiveContent>(ActiveContent.waitingServer)
 
-  const usernameRef = useRef<string>('')
+  const memorizedActiveContent = useMemo(() => {
+    if (activeContent === ActiveContent.welcome) return <Welcome />
+    if (activeContent === ActiveContent.waitingServer) return <WaitingServer />
+  }, [activeContent])
 
-  useEffect(() => {
-    if (authState.username) navigate(ROUTER_PATHS.activeUsers)
-
-    serverListeners.alreadyExistUsername(() => {
-      setAlreadyExist(true)
-    })
-
-    serverListeners.correctUsernameToLogin((socketId: string) => {
-      localStorage.setItem(USERNAME_LOCALSTORAGE, usernameRef.current)
-      dispatch(authActions.setUsername(usernameRef.current))
-      dispatch(authActions.setSocketId(socketId))
-      navigate(ROUTER_PATHS.activeUsers)
-    })
-  }, [])
-
-  const handleSaveUsername = () => {
-    if (usernameRef.current === '') return
-    serverEvents.login(usernameRef.current)
-  }
-
-  const handleChangeUsername = (username: string) => {
-    usernameRef.current = username
-  }
-
-  return (
-    <div className="welcome">
-      <div className="welcome__text">Welcome !</div>
-      <input
-        onKeyPress={e => e.key === 'Enter' && handleSaveUsername()}
-        onChange={e => handleChangeUsername(e.target.value)}
-        placeholder="Type a username to play..."
-        className="welcome__username-input"
-      />
-      {alreadyExist && <div className="welcome__error">Already exist the username</div>}
-      <div onClick={handleSaveUsername} className="welcome__save-username">
-        Login
-      </div>
-    </div>
-  )
+  return <div className="welcome">{memorizedActiveContent}</div>
 }
 
 export default WelcomeUser
